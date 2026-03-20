@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>25craft — Handmade Lures</title>
+<title>Воблери ручної роботи | 25craft</title>
+<meta name="description" content="Риболовні приманки ручної роботи. Інливідуальні замовлення, унікальний дизайн. Перевірено рибалками України.">
+<meta name="keywords" content="риболовні приманки, воблер на форель, воблери ручної роботи, воблер на голавля, 25craft">
+<meta property="og:title" content="25craft — Handmade Lures">
+<meta property="og:description" content="Рибальські приманки ручної роботи. Унікальне розфарбування, перевірено на рибалці.">
+<meta property="og:image" content="https://www.instagram.com/25_craft/">
+<meta property="og:url" content="https://crafty25.github.io/25craft/">
+<meta name="robots" content="index, follow">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -52,13 +59,13 @@ header {
   gap: 12px;
 }
 
-.logo-mark {
+/* .logo-mark {
   width: 36px; height: 36px;
   background: var(--accent);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-}
+} */
 
 .logo-mark span {
   font-family: 'Bebas Neue', sans-serif;
@@ -667,6 +674,42 @@ header {
   margin-bottom: 24px;
 }
 
+/* ── TRUST BLOCK ── */
+.trust {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.trust-item {
+  background: var(--surface);
+  padding: 22px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.trust-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+.trust-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.trust-desc { font-size: 11px; color: var(--muted2); line-height: 1.5; }
+
+/* quantity badge on card */
+.qty-badge {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--accent2);
+  margin-top: 5px;
+}
+
 /* ── FOOTER ── */
 footer {
   padding: 32px 40px;
@@ -750,7 +793,7 @@ footer {
 <div class="hero">
   <div>
     <div class="hero-title">HAND<br><em>MADE</em><br>LURES</div>
-    <div class="hero-desc">Кожна приманка зроблена вручну в Україні.<br>Унікальне розфарбування, перевірено на рибалці.</div>
+    <div class="hero-desc">Кожна приманка зроблена та налаштована вручну.<br>Авторський дизайн та колір</div>
   </div>
   <div class="hero-right">
     <div class="hero-stat" id="stockCount">0</div>
@@ -761,9 +804,9 @@ footer {
 <!-- FILTERS -->
 <div class="filters">
   <button class="filter-btn active" data-filter="all">Всі</button>
-  <button class="filter-btn" data-filter="Sinking">Sinking</button>
+  <!-- <button class="filter-btn" data-filter="Sinking">Sinking</button>
   <button class="filter-btn" data-filter="Floating">Floating</button>
-  <button class="filter-btn" data-filter="Suspending">Suspending</button>
+  <button class="filter-btn" data-filter="Suspending">Suspending</button> -->
   <button class="filter-btn" data-filter="available">Тільки в наявності</button>
 </div>
 
@@ -772,9 +815,44 @@ footer {
   <div class="grid" id="grid"></div>
 </div>
 
+<!-- TRUST BLOCK -->
+<div class="trust">
+  <div class="trust-item">
+    <div class="trust-icon">🎣</div>
+    <div>
+      <div class="trust-label">25craft — handmade lures</div>
+      <div class="trust-desc"><Багаторічний досвід у створенні риболовних приманко><br>Кожний виріб - ручна робота від початку до кінця.</div>
+    </div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">💳</div>
+    <div>
+      <div class="trust-label">Оплата після підтвердження</div>
+      <div class="trust-desc">Оплата на карту (Monobank/OTP)<br>після того як я підтверджу замовлення.</div>
+    </div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">📦</div>
+    <div>
+      <div class="trust-label">Доставка — обговорюється індивідуально</div>
+      <div class="trust-desc">Умови доставки узгоджуємо після оформлення замовлення.<br>Зв'яжусь з вами найближчим часом.</div>
+    </div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">📸</div>
+    <div>
+      <div class="trust-label">Живі фото та відгуки</div>
+      <div class="trust-desc">Дивіться реальні фото та відгуки покупців<br>в Instagram <a href="https://instagram.com/25_craft" target="_blank" style="color:var(--accent);text-decoration:none">@25_craft</a></div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
-  <div class="footer-note">Всі приманки ручної роботи · Україна · Доставка Новою Поштою</div>
+  <div>
+    <div class="footer-note">Всі приманки ручної роботи · Україна</div>
+    <div class="footer-note" style="margin-top:6px">© 2026 25craft · Всі права захищені</div>
+  </div>
   <a href="https://instagram.com/25_craft" target="_blank" class="footer-ig">@25_craft</a>
 </footer>
 
@@ -800,7 +878,7 @@ footer {
   <div class="order-modal">
     <div class="order-form-content" id="orderFormContent">
       <div class="order-modal-title">Оформлення</div>
-      <div class="order-modal-sub">Залишіть номер телефону — я зв'яжусь з вами для уточнення оплати та доставки.</div>
+      <div class="order-modal-sub">Залишіть номер телефону - я зв'яжусь з вами для уточнення оплати та доставки.</div>
 
       <div class="order-summary" id="orderSummary"></div>
 
@@ -830,18 +908,12 @@ footer {
 </div>
 
 <script>
-// ================================================================
-// ⚙️  НАЛАШТУВАННЯ — ВСТАВТЕ СВОЇ ДАНІ ТУТ
-// ================================================================
 const TELEGRAM_BOT_TOKEN = "8679783832:AAHnvfB7Hxvqw-ulFBYaORLzKsx9_sgOVxg";
-// Приклад: "7412345678:AAHx3kGjF9..."
 
 const TELEGRAM_CHAT_ID = "499821932";
-// Приклад: "123456789"
-// ================================================================
 
 // ================================================================
-// 🎣  КАТАЛОГ ПРИМАНОК — редагуйте тут
+// 🎣  КАТАЛОГ ПРИМАНОК
 // ================================================================
 const lures = [
   {
@@ -852,6 +924,7 @@ const lures = [
     type: "Sinking",
     color: "Окунь — зелено-жовтий",
     price: 350,
+    qty: 1,
     status: "available", // available | sold | reserved
     notes: "Класична забарвлення під окуня.",
     img: "" // вставте URL фото
@@ -864,6 +937,7 @@ const lures = [
     type: "Floating",
     color: "Пескарь — коричнево-срібний",
     price: 400,
+    qty: 2,
     status: "available",
     notes: "Легка приманка для мілководдя.",
     img: ""
@@ -876,6 +950,7 @@ const lures = [
     type: "Sinking",
     color: "Ягода — зелена крапка",
     price: 380,
+    qty: 0,
     status: "sold",
     notes: "Незвична забарвлення. Добре провокує хижака.",
     img: ""
@@ -888,6 +963,7 @@ const lures = [
     type: "Suspending",
     color: "Карась — золото-оранжевий",
     price: 420,
+    qty: 1,
     status: "available",
     notes: "Суспендер — зависає в товщі води.",
     img: ""
@@ -900,6 +976,7 @@ const lures = [
     type: "Sinking",
     color: "Форель — рожево-срібний",
     price: 360,
+    qty: 1,
     status: "reserved",
     notes: "Яскрава забарвлення форелі.",
     img: ""
@@ -912,6 +989,7 @@ const lures = [
     type: "Floating",
     color: "New Design — жовто-зелений",
     price: 450,
+    qty: 3,
     status: "available",
     notes: "Новий дизайн. Обмежена кількість.",
     img: ""
@@ -968,6 +1046,7 @@ function renderGrid(filter) {
           <span class="tag ${typeTagClass[l.type] || ''}">${l.type}</span>
         </div>
         <div class="card-color">${l.color}</div>
+        ${l.status === 'available' && l.qty === 1 ? `<div class="qty-badge">⚠ Залишився 1 екземпляр</div>` : ''}
         <button
           class="card-add-btn ${inCart ? 'in-cart' : ''}"
           onclick="toggleCart(${l.id})"
