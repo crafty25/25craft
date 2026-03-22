@@ -339,6 +339,67 @@ header {
   cursor: not-allowed;
 }
 
+/* ── SLIDER ── */
+.card-slider {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: #111;
+}
+
+.slider-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+.slider-slide {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.55);
+  border: none;
+  color: #fff;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 2;
+  transition: background 0.15s;
+  opacity: 0;
+}
+
+.card-slider:hover .slider-btn { opacity: 1; }
+.slider-btn:hover { background: rgba(0,0,0,0.85); }
+.slider-btn.prev { left: 6px; }
+.slider-btn.next { right: 6px; }
+
+.slider-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+
+.slider-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transition: background 0.15s;
+}
+
+.slider-dot.active { background: #fff; }
+
 /* ── CART DRAWER ── */
 .drawer-overlay {
   position: fixed;
@@ -1028,9 +1089,25 @@ function renderGrid(filter) {
     const card = document.createElement("div");
     card.className = "card" + (sold ? " sold" : "");
 
-    const imgHtml = l.img
-      ? `<img class="card-img" src="${l.img}" alt="${l.name}" loading="lazy">`
-      : `<div class="card-img-placeholder">🎣</div>`;
+    // Normalize img to array
+    const imgs = Array.isArray(l.img) ? l.img.filter(Boolean) : (l.img ? [l.img] : []);
+
+    let imgHtml = "";
+    if (imgs.length === 0) {
+      imgHtml = `<div class="card-img-placeholder">🎣</div>`;
+    } else if (imgs.length === 1) {
+      imgHtml = `<div class="card-slider"><div class="slider-track"><img class="slider-slide" src="${imgs[0]}" alt="${l.name}" loading="lazy"></div></div>`;
+    } else {
+      const slides = imgs.map(src => `<img class="slider-slide" src="${src}" alt="${l.name}" loading="lazy">`).join("");
+      const dots = imgs.map((_, i) => `<span class="slider-dot ${i===0?'active':''}" onclick="slideTo(${l.id},${i},event)"></span>`).join("");
+      imgHtml = `
+        <div class="card-slider" id="slider_${l.id}">
+          <div class="slider-track" id="track_${l.id}">${slides}</div>
+          <button class="slider-btn prev" onclick="slideDir(${l.id},-1,event)">‹</button>
+          <button class="slider-btn next" onclick="slideDir(${l.id},1,event)">›</button>
+          <div class="slider-dots" id="dots_${l.id}">${dots}</div>
+        </div>`;
+    }
 
     card.innerHTML = `
       <div class="card-img-wrap">
@@ -1103,10 +1180,12 @@ function renderDrawer() {
     return;
   }
 
-  wrap.innerHTML = cart.map(l => `
+  wrap.innerHTML = cart.map(l => {
+    const firstImg = Array.isArray(l.img) ? l.img[0] : l.img;
+    return `
     <div class="drawer-item">
-      ${l.img
-        ? `<img class="drawer-item-img" src="${l.img}" alt="${l.name}">`
+      ${firstImg
+        ? `<img class="drawer-item-img" src="${firstImg}" alt="${l.name}">`
         : `<div class="drawer-item-img">🎣</div>`
       }
       <div class="drawer-item-info">
@@ -1116,7 +1195,7 @@ function renderDrawer() {
       <div class="drawer-item-price">${l.price} грн</div>
       <button class="drawer-item-remove" onclick="removeFromCart(${l.id})" title="Видалити">✕</button>
     </div>
-  `).join("");
+  `}).join("");
 }
 
 function openDrawer() {
@@ -1258,6 +1337,39 @@ ${orderLines}
     btn.disabled = false;
     spinner.classList.remove("visible");
     btnText.textContent = "Надіслати замовлення";
+  }
+}
+
+// ── SLIDER ──
+const sliderState = {};
+
+function slideDir(id, dir, e) {
+  e.stopPropagation();
+  const lure = lures.find(l => l.id === id);
+  const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
+  if (!imgs.length) return;
+  sliderState[id] = sliderState[id] || 0;
+  sliderState[id] = (sliderState[id] + dir + imgs.length) % imgs.length;
+  applySlide(id, imgs.length);
+}
+
+function slideTo(id, idx, e) {
+  e.stopPropagation();
+  const lure = lures.find(l => l.id === id);
+  const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
+  sliderState[id] = idx;
+  applySlide(id, imgs.length);
+}
+
+function applySlide(id, total) {
+  const track = document.getElementById(`track_${id}`);
+  const dotsEl = document.getElementById(`dots_${id}`);
+  const idx = sliderState[id] || 0;
+  if (track) track.style.transform = `translateX(-${idx * 100}%)`;
+  if (dotsEl) {
+    dotsEl.querySelectorAll(".slider-dot").forEach((d, i) => {
+      d.classList.toggle("active", i === idx);
+    });
   }
 }
 
