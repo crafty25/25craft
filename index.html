@@ -227,15 +227,15 @@
 
     /* ── GRID ── */
     .grid-wrap {
-      padding: 1px 0;
-      background: var(--border);
+      padding: 16px;
+      background: var(--bg);
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1px;
-      background: var(--border);
+      gap: 16px;
+      background: var(--bg);
     }
 
     /* ── CARD ── */
@@ -1308,14 +1308,14 @@
         if (imgs.length === 0) {
           imgHtml = `<div class="card-img-placeholder">🎣</div>`;
         } else if (imgs.length === 1) {
-          imgHtml = `<div class="card-slider" style="cursor:zoom-in" onclick="openLightbox(${JSON.stringify(imgs)}, 0)"><div class="slider-track"><img class="slider-slide" src="${imgs[0]}" alt="${l.name}" loading="lazy"></div></div>`;
+          imgHtml = `<div class="card-slider" style="cursor:zoom-in" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${imgs[0]}" alt="${l.name}" loading="lazy"></div></div>`;
         } else {
           const slides = imgs.map(src => `<img class="slider-slide" src="${src}" alt="${l.name}" loading="lazy">`).join("");
           const dots = imgs.map((_, i) => `<span class="slider-dot ${i === 0 ? 'active' : ''}" onclick="slideTo(${l.id},${i},event)"></span>`).join("");
           imgHtml = `
         <div class="card-slider" id="slider_${l.id}">
           <div class="slider-track" id="track_${l.id}">${slides}</div>
-          <div style="position:absolute;inset:0;z-index:1;cursor:zoom-in" onclick="openLightbox(${JSON.stringify(imgs)}, sliderState[${l.id}]||0)"></div>
+          <div style="position:absolute;inset:0;z-index:1;cursor:zoom-in" onclick="openLightboxById(${l.id}, sliderState[${l.id}]||0)"></div>
           <button class="slider-btn prev" style="z-index:3" onclick="slideDir(${l.id},-1,event)">‹</button>
           <button class="slider-btn next" style="z-index:3" onclick="slideDir(${l.id},1,event)">›</button>
           <div class="slider-dots" style="z-index:3" id="dots_${l.id}">${dots}</div>
@@ -1611,6 +1611,12 @@ ${orderLines}
     // ── LIGHTBOX ──
     let lbImgs = [];
     let lbIdx = 0;
+
+    function openLightboxById(id, startIdx) {
+      const lure = lures.find(l => l.id === id);
+      const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : (lure.img ? [lure.img] : []);
+      openLightbox(imgs, startIdx);
+    }
 
     function openLightbox(imgs, startIdx) {
       lbImgs = imgs;
