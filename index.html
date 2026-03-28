@@ -142,6 +142,100 @@
       display: flex;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .custom-order-btn {
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: #0c0c0c;
+      padding: 8px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .custom-order-btn:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    /* ── CUSTOM ORDER MODAL ── */
+    .custom-order-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      padding: 16px;
+    }
+
+    .custom-order-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .custom-order-modal {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      padding: 36px 32px 32px;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      transform: translateY(16px);
+      transition: transform 0.2s;
+    }
+
+    .custom-order-overlay.open .custom-order-modal {
+      transform: translateY(0);
+    }
+
+    .custom-order-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: var(--muted2);
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.15s;
+    }
+
+    .custom-order-close:hover { color: var(--text); }
+
+    .custom-order-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .custom-order-desc {
+      font-size: 12px;
+      color: var(--muted2);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .custom-order-success { display: none; text-align: center; padding: 16px 0; }
+    .custom-order-success.visible { display: block; }
+    .custom-order-form.hidden { display: none; }
+
     /* ── HERO ── */
     .hero {
       padding: 64px 40px 48px;
@@ -367,6 +461,13 @@
       font-size: 11px;
       color: var(--muted);
       font-style: italic;
+    }
+
+    .card-notes {
+      font-size: 11px;
+      color: var(--muted2);
+      margin-top: 5px;
+      line-height: 1.45;
     }
 
     .card-add-btn {
@@ -865,6 +966,7 @@
 
     /* ── TRUST BLOCK ── */
     .trust {
+      margin-top: 100px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1px;
@@ -916,7 +1018,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 1px;
+      margin-top: 0px;
       background: var(--surface);
     }
 
@@ -1134,10 +1236,13 @@
         <div class="logo-sub">Handmade Lures</div>
       </div>
     </div>
-    <button class="cart-btn" onclick="openDrawer()">
-      🛒 Кошик
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
+    <div class="header-actions">
+      <button class="custom-order-btn" onclick="openCustomOrder()">Індивідуальне замовлення</button>
+      <button class="cart-btn" onclick="openDrawer()">
+        🛒 Кошик
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
   </header>
 
   <!-- HERO -->
@@ -1173,7 +1278,7 @@
       <div>
         <div class="trust-label">25craft — handmade lures</div>
         <div class="trust-desc">
-          <Багаторічний досвід у створенні риболовних приманко><br>Кожний виріб - ручна робота від початку до кінця.
+          <Багаторічний досвід у створенні риболовних приманко>
         </div>
       </div>
     </div>
@@ -1181,22 +1286,21 @@
       <div class="trust-icon">💳</div>
       <div>
         <div class="trust-label">Оплата після підтвердження</div>
-        <div class="trust-desc">Оплата на карту (Monobank/OTP)<br>після того як я підтверджу замовлення.</div>
+        <div class="trust-desc">Оплата на карту (Monobank/OTP)</div>
       </div>
     </div>
     <div class="trust-item">
       <div class="trust-icon">📦</div>
       <div>
-        <div class="trust-label">Доставка — обговорюється індивідуально</div>
-        <div class="trust-desc">Умови доставки узгоджуємо після оформлення замовлення.<br>Зв'яжусь з вами найближчим
-          часом.</div>
+        <div class="trust-label">Доставка</div>
+        <div class="trust-desc">Умови доставки узгоджуємо після оформлення замовлення.</div>
       </div>
     </div>
     <div class="trust-item">
       <div class="trust-icon">📸</div>
       <div>
         <div class="trust-label">Живі фото та відгуки</div>
-        <div class="trust-desc">Дивіться реальні фото та відгуки покупців<br>в Instagram <a
+        <div class="trust-desc">Мій профіль в Instagram <a
             href="https://instagram.com/25_craft" target="_blank"
             style="color:var(--accent);text-decoration:none">@25_craft</a></div>
       </div>
@@ -1206,11 +1310,48 @@
   <!-- FOOTER -->
   <footer>
     <div>
-      <div class="footer-note">Всі приманки ручної роботи · Україна</div>
+      <div class="footer-note">Риболовні приманки ручної роботи · Україна</div>
       <div class="footer-note" style="margin-top:6px">© 2026 25craft · Всі права захищені</div>
     </div>
     <a href="https://instagram.com/25_craft" target="_blank" class="footer-ig">@25_craft</a>
   </footer>
+
+  <!-- CUSTOM ORDER MODAL -->
+  <div class="custom-order-overlay" id="customOrderOverlay" onclick="handleCustomOrderOverlayClick(event)">
+    <div class="custom-order-modal">
+      <button class="custom-order-close" onclick="closeCustomOrder()">✕</button>
+
+      <div class="custom-order-form" id="customOrderForm">
+        <div class="custom-order-title">Індивідуальне замовлення</div>
+        <div class="custom-order-desc">
+          Залиште свої контакти — я зв'яжусь з вами і ми обговоримо деталі:<br>
+          колір, модель, терміни та ціну.
+        </div>
+
+        <label class="field-label">Ваше ім'я</label>
+        <input class="field-input" id="customNameInput" type="text" placeholder="Ваше імʼя">
+
+        <label class="field-label">Номер телефону *</label>
+        <input class="field-input" id="customPhoneInput" type="tel" placeholder="+380 XX XXX XX XX" maxlength="17"
+          oninput="formatPhone(this)">
+        <div class="field-error" id="customPhoneError">Введіть коректний номер телефону</div>
+
+        <div class="order-actions">
+          <button class="btn-submit" id="customSubmitBtn" onclick="submitCustomOrder()">
+            <span class="spinner" id="customSubmitSpinner"></span>
+            <span id="customSubmitText">Надіслати</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="custom-order-success" id="customOrderSuccess">
+        <div style="font-size:40px;margin-bottom:14px">✅</div>
+        <div class="success-title">Дякую!</div>
+        <div class="success-text">Отримав ваш запит. Зв'яжусь з вами найближчим часом.</div>
+        <button class="checkout-btn" onclick="closeCustomOrder()" style="max-width:200px;margin:16px auto 0;display:block">Закрити</button>
+      </div>
+    </div>
+  </div>
 
   <!-- CART DRAWER -->
   <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
@@ -1280,96 +1421,151 @@
   </div>
 
   <script>
-    const TELEGRAM_BOT_TOKEN = "8679783832:AAHnvfB7Hxvqw-ulFBYaORLzKsx9_sgOVxg";
-
-    const TELEGRAM_CHAT_ID = "499821932";
+    const WORKER_URL = "https://25craft-bot.m-poliakh.workers.dev";
 
     // ================================================================
-    // 🎣  КАТАЛОГ ПРИМАНОК
+    // КАТАЛОГ ПРИМАНОК
     // ================================================================
     const lures = [
       {
         id: 1,
-        name: "Crank",
+        name: "Chubster 25S",
         weight: "2.5g",
         length: "25mm",
         type: "Slow Sinking",
         color: "Green",
         price: 450,
-        qty: 3,
+        qty: 1,
         status: "available", // available | sold | reserved
-        notes: "Класична забарвлення під окуня.",
+        notes: "занурення до 30см",
         img: [
-          "Images/crank_1.webp",
-          "Images/crank_2.webp",
-          "Images/crank_3.webp",
-          "Images/crank_4.webp"
-        ]// вставте URL фото
+          "Images/F705E9F5-881A-41C4-9C18-A98DEC59090C_1_201_a.webp",
+          "Images/751A9616-6BF7-49A5-AF75-6BE7A9FE1F15_1_201_a.webp",
+          "Images/DC11EE4E-009D-40AC-91FF-C6065837F95C_1_201_a.webp",
+        ]
       },
       {
         id: 2,
-        name: "Воблер #02",
-        weight: "5g",
-        length: "55mm",
-        type: "Floating",
-        color: "Пескарь — коричнево-срібний",
-        price: 400,
-        qty: 2,
-        status: "available",
-        notes: "Легка приманка для мілководдя.",
-        img: ""
+        name: "Chubster 25S",
+        weight: "2.5g",
+        length: "25mm",
+        type: "Slow Sinking",
+        color: "Green",
+        price: 450,
+        qty:3,
+        status: "available", // available | sold | reserved
+        notes: "Ціна указана за 1шт",
+        img:[ 
+          "Images/3031B18D-B250-4E6F-B8CE-A237D753F951_4_5005_c.webp",
+          "Images/26654ECC-9368-45AB-B536-D2EAE0EEECDE_4_5005_c.webp",
+          "Images/4063606F-B701-4D44-A666-82A6F8810B24_4_5005_c.webp"
+        ]
       },
       {
         id: 3,
-        name: "Раттлін #03",
-        weight: "10g",
-        length: "70mm",
-        type: "Sinking",
-        color: "Ягода — зелена крапка",
-        price: 380,
-        qty: 0,
-        status: "sold",
-        notes: "Незвична забарвлення. Добре провокує хижака.",
-        img: ""
+        name: "Surikku 35S",
+        weight: "2.4g",
+        length: "35mm",
+        type: "Slow Sinking",
+        color: "Green",
+        price: 550,
+        qty:3,
+        status: "available", // available | sold | reserved
+        notes: "занурення до 30-40см",
+        img:[ 
+          "Images/Surikku 9898.webp",
+          "Images/Surikku 65322.webp",
+          "Images/Surikku_12.webp",
+          "Images/Surikku3 5.webp",
+          "Images/Surikku0097.webp",
+          "Images/Surikku2212.webp"
+        ]
       },
-      {
+{
         id: 4,
-        name: "Воблер #04",
-        weight: "6g",
-        length: "65mm",
-        type: "Suspending",
-        color: "Карась — золото-оранжевий",
-        price: 420,
-        qty: 1,
-        status: "available",
-        notes: "Суспендер — зависає в товщі води.",
-        img: ""
+        name: "Surikku 35S",
+        weight: "2.4g",
+        length: "35mm",
+        type: "Slow Sinking",
+        color: "Green",
+        price: 550,
+        qty:1,
+        status: "available", // available | sold | reserved
+        notes: "занурення до 30-40см",
+        img:[ 
+          "Images/Orange.webp",
+          "Images/Surikku (orange).webp",
+          "Images/Surikku (orange)2.webp",
+          "Images/Surikku (orange)3.webp"   
+        ]
       },
       {
         id: 5,
-        name: "Раттлін #05",
-        weight: "8g",
-        length: "62mm",
-        type: "Sinking",
-        color: "Форель — рожево-срібний",
-        price: 360,
-        qty: 1,
-        status: "reserved",
-        notes: "Яскрава забарвлення форелі.",
-        img: ""
+        name: "Surikku 35S",
+        weight: "2.4g",
+        length: "35mm",
+        type: "Slow Sinking",
+        color: "Green",
+        price: 550,
+        qty:1,
+        status: "available", // available | sold | reserved
+        notes: "занурення до 30-40см",
+        img:[ 
+          "Images/Surikku_green.webp",
+          "Images/Surikku_green_1.webp",
+          "Images/Surikku_green_3.webp"
+        ]
       },
       {
         id: 6,
-        name: "Воблер #06",
-        weight: "9g",
-        length: "75mm",
-        type: "Floating",
-        color: "New Design — жовто-зелений",
-        price: 450,
-        qty: 3,
-        status: "available",
-        notes: "Новий дизайн. Обмежена кількість.",
-        img: ""
+        name: "Surikku 35S",
+        weight: "2.4g",
+        length: "35mm",
+        type: "Slow Sinking",
+        color: "Green",
+        price: 550,
+        qty:1,
+        status: "available", // available | sold | reserved
+        notes: "занурення до 30-40см",
+        img:[ 
+          "Images/Fox.webp",
+          "Images/Fox_1.webp",
+          "Images/Fox_2.webp"
+        ]
+      },
+      {
+        id: 7,
+        name: "Surikku 35S",
+        weight: "2.4g",
+        length: "35mm",
+        type: "Slow Sinking",
+        color: "Green",
+        price: 600,
+        qty:1,
+        status: "available", // available | sold | reserved
+        notes: "занурення до 30-40см",
+        img:[ 
+          "Images/Viol_1.webp",
+          "Images/Viol_2.webp",
+          "Images/Viol_3.webp"
+        ]
+      },
+       {
+        id: 8,
+        name: "Surikku 35S",
+        weight: "2.4g",
+        length: "35mm",
+        type: "Slow Sinking",
+        color: "Green",
+        price: 600,
+        qty:1,
+        status: "available", // available | sold | reserved
+        notes: "занурення до 30-40см",
+        img:[ 
+          "Images/rainbow.webp",
+          "Images/Rainbow_87677.webp",
+          "Images/rainbow_09.webp"
+        ]
       }
     ];
     // ================================================================
@@ -1440,6 +1636,7 @@
           <span class="tag ${typeTagClass[l.type] || ''}">${l.type}</span>
         </div>
         <div class="card-color">${l.color}</div>
+        ${l.notes ? `<div class="card-notes">${l.notes}</div>` : ''}
         ${l.status === 'available' ? `<div class="qty-badge">В наявності: ${l.qty} шт</div>` : ''}
         <button
           class="card-add-btn ${inCart ? 'in-cart' : ''}"
@@ -1629,14 +1826,10 @@ ${orderLines}
 ⏰ ${new Date().toLocaleString("uk-UA")}`;
 
       try {
-        const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        const res = await fetch(WORKER_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-            parse_mode: "Markdown"
-          })
+          body: JSON.stringify({ message })
         });
 
         const data = await res.json();
@@ -1648,7 +1841,7 @@ ${orderLines}
           throw new Error(data.description || "Telegram error");
         }
       } catch (err) {
-        alert("Помилка відправки. Перевірте токен бота і Chat ID у налаштуваннях файлу.\n\nДеталі: " + err.message);
+        alert("Помилка відправки. Спробуйте ще раз або напишіть нам в Instagram.\n\nДеталі: " + err.message);
         btn.disabled = false;
         spinner.classList.remove("visible");
         btnText.textContent = "Надіслати замовлення";
@@ -1702,6 +1895,7 @@ ${orderLines}
     document.addEventListener("keydown", e => {
       if (e.key === "Escape") {
         if (document.getElementById("lightbox").classList.contains("open")) closeLightbox();
+        else if (document.getElementById("customOrderOverlay").classList.contains("open")) closeCustomOrder();
         else if (document.getElementById("orderOverlay").classList.contains("open")) closeOrder();
         else closeDrawer();
       }
@@ -1709,6 +1903,74 @@ ${orderLines}
       if (e.key === "ArrowRight" && document.getElementById("lightbox").classList.contains("open")) lightboxDir(1);
       if (e.key === "Enter" && document.getElementById("orderOverlay").classList.contains("open")) submitOrder();
     });
+
+    // ── CUSTOM ORDER ──
+    function openCustomOrder() {
+      document.getElementById("customOrderOverlay").classList.add("open");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => document.getElementById("customNameInput").focus(), 100);
+    }
+
+    function closeCustomOrder() {
+      document.getElementById("customOrderOverlay").classList.remove("open");
+      document.body.style.overflow = "";
+      document.getElementById("customOrderForm").classList.remove("hidden");
+      document.getElementById("customOrderSuccess").classList.remove("visible");
+      document.getElementById("customNameInput").value = "";
+      document.getElementById("customPhoneInput").value = "";
+      document.getElementById("customPhoneError").classList.remove("visible");
+      document.getElementById("customPhoneInput").classList.remove("error");
+      document.getElementById("customSubmitBtn").disabled = false;
+      document.getElementById("customSubmitSpinner").classList.remove("visible");
+      document.getElementById("customSubmitText").textContent = "Надіслати";
+    }
+
+    function handleCustomOrderOverlayClick(e) {
+      if (e.target === document.getElementById("customOrderOverlay")) closeCustomOrder();
+    }
+
+    async function submitCustomOrder() {
+      const name = document.getElementById("customNameInput").value.trim();
+      const phone = document.getElementById("customPhoneInput").value.trim();
+      const phoneError = document.getElementById("customPhoneError");
+      const phoneInput = document.getElementById("customPhoneInput");
+
+      if (!validatePhone(phone)) {
+        phoneInput.classList.add("error");
+        phoneError.classList.add("visible");
+        phoneInput.focus();
+        return;
+      }
+      phoneInput.classList.remove("error");
+      phoneError.classList.remove("visible");
+
+      const btn = document.getElementById("customSubmitBtn");
+      btn.disabled = true;
+      document.getElementById("customSubmitSpinner").classList.add("visible");
+      document.getElementById("customSubmitText").textContent = "Надсилаємо...";
+
+      const message = `✏️ *Індивідуальне замовлення — 25craft*\n\n👤 *Ім'я:* ${name || "не вказано"}\n📞 *Телефон:* ${phone}\n\n⏰ ${new Date().toLocaleString("uk-UA")}`;
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          document.getElementById("customOrderForm").classList.add("hidden");
+          document.getElementById("customOrderSuccess").classList.add("visible");
+        } else {
+          throw new Error(data.description || "Telegram error");
+        }
+      } catch (err) {
+        alert("Помилка відправки. Деталі: " + err.message);
+        btn.disabled = false;
+        document.getElementById("customSubmitSpinner").classList.remove("visible");
+        document.getElementById("customSubmitText").textContent = "Надіслати";
+      }
+    }
 
     // ── LIGHTBOX ──
     let lbImgs = [];
