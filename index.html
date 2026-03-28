@@ -1568,154 +1568,14 @@
   <script>
     const WORKER_URL = "https://25craft-bot.m-poliakh.workers.dev";
 
+    const SHEETS_ID = "1uDmg_gaX-IesJF1G7T14EMD_BLXFO7ZSnFzH7-94yZg";
+    const SHEETS_KEY = "AIzaSyCxlz5UMcnT7KqCrGmU82CK5zB-nF1cjkM0";
+    const SHEETS_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/Sheet1?key=${SHEETS_KEY}`;
+
     // ================================================================
-    // КАТАЛОГ ПРИМАНОК
+    // КАТАЛОГ ПРИМАНОК — завантажується з Google Sheets
     // ================================================================
-    const lures = [
-      {
-        id: 1,
-        name: "Chubster 25S",
-        weight: "2.5g",
-        length: "25mm",
-        type: "Slow Sinking",
-        color: "Green",
-        price: 450,
-        oldPrice: 500,
-        qty: 1,
-        status: "available", // available | sold | reserved
-        notes: "занурення до 30см",
-        img: [
-          "Images/F705E9F5-881A-41C4-9C18-A98DEC59090C_1_201_a.webp",
-          "Images/751A9616-6BF7-49A5-AF75-6BE7A9FE1F15_1_201_a.webp",
-          "Images/DC11EE4E-009D-40AC-91FF-C6065837F95C_1_201_a.webp",
-        ]
-      },
-      {
-        id: 2,
-        name: "Chubster 25S",
-        weight: "2.5g",
-        length: "25mm",
-        type: "Slow Sinking",
-        color: "Green",
-        price: 450,
-        oldPrice: 500,
-        qty:3,
-        status: "available", // available | sold | reserved
-        notes: "Ціна указана за 1шт",
-        img:[ 
-          "Images/3031B18D-B250-4E6F-B8CE-A237D753F951_4_5005_c.webp",
-          "Images/26654ECC-9368-45AB-B536-D2EAE0EEECDE_4_5005_c.webp",
-          "Images/4063606F-B701-4D44-A666-82A6F8810B24_4_5005_c.webp"
-        ]
-      },
-      {
-        id: 3,
-        name: "Surikku 35S",
-        weight: "2.4g",
-        length: "35mm",
-        type: "Slow Sinking",
-        price: 500,
-        oldPrice: 600,
-        qty:3,
-        status: "available", // available | sold | reserved
-        notes: "занурення до 30-40см",
-        img:[ 
-          "Images/Surikku 9898.webp",
-          "Images/Surikku 65322.webp",
-          "Images/Surikku_12.webp",
-          "Images/Surikku3 5.webp",
-          "Images/Surikku0097.webp",
-          "Images/Surikku2212.webp"
-        ]
-      },
-{
-        id: 4,
-        name: "Surikku 35S",
-        weight: "2.4g",
-        length: "35mm",
-        type: "Slow Sinking",
-        price: 550,
-        oldPrice: 600,
-        qty:1,
-        status: "available", // available | sold | reserved
-        notes: "занурення до 30-40см",
-        img:[ 
-          "Images/Orange.webp",
-          "Images/Surikku (orange).webp",
-          "Images/Surikku (orange)2.webp",
-          "Images/Surikku (orange)3.webp"   
-        ]
-      },
-      {
-        id: 5,
-        name: "Surikku 35S",
-        weight: "2.4g",
-        length: "35mm",
-        type: "Slow Sinking",
-        color: "Green",
-        price: 550,
-        oldPrice: 600,
-        qty:1,
-        status: "available", // available | sold | reserved
-        notes: "занурення до 30-40см",
-        img:[ 
-          "Images/Surikku_green.webp",
-          "Images/Surikku_green_1.webp",
-          "Images/Surikku_green_3.webp"
-        ]
-      },
-      {
-        id: 6,
-        name: "Surikku 35S",
-        weight: "2.4g",
-        length: "35mm",
-        type: "Slow Sinking",
-        price: 550,
-        oldPrice: 600,
-        qty:1,
-        status: "available", // available | sold | reserved
-        notes: "занурення до 30-40см",
-        img:[ 
-          "Images/Fox.webp",
-          "Images/Fox_1.webp",
-          "Images/Fox_2.webp"
-        ]
-      },
-      {
-        id: 7,
-        name: "Surikku 35S",
-        weight: "2.4g",
-        length: "35mm",
-        type: "Slow Sinking",
-        color: "Green",
-        price: 600,
-        qty:1,
-        status: "available", // available | sold | reserved
-        notes: "занурення до 30-40см",
-        img:[ 
-          "Images/Viol_1.webp",
-          "Images/Viol_2.webp",
-          "Images/Viol_3.webp"
-        ]
-      },
-       {
-        id: 8,
-        name: "Surikku 35S",
-        weight: "2.4g",
-        length: "35mm",
-        type: "Slow Sinking",
-        color: "Green",
-        price: 600,
-        qty:1,
-        status: "available", // available | sold | reserved
-        notes: "занурення до 30-40см",
-        img:[ 
-          "Images/rainbow.webp",
-          "Images/Rainbow_87677.webp",
-          "Images/rainbow_09.webp"
-        ]
-      }
-    ];
+    let lures = [];
     // ================================================================
 
     let cart = [];
@@ -2248,8 +2108,47 @@ ${orderLines}
     }
 
     // ── INIT ──
-    document.getElementById("stockCount").textContent = lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
-    renderGrid("all");
+    async function loadFromSheets() {
+      const grid = document.getElementById("grid");
+      grid.innerHTML = '<div class="grid-empty">Завантаження...</div>';
+
+      try {
+        const res = await fetch(SHEETS_URL);
+        const data = await res.json();
+        const rows = data.values || [];
+        const headers = rows[0]; // перший рядок — заголовки
+
+        lures = rows.slice(1).map(row => {
+          const obj = {};
+          headers.forEach((h, i) => obj[h] = row[i] || "");
+          return {
+            id: Number(obj.id),
+            name: obj.name,
+            weight: obj.weight,
+            length: obj.length,
+            type: obj.type,
+            color: obj.color,
+            price: Number(obj.price),
+            oldPrice: obj.oldPrice ? Number(obj.oldPrice) : null,
+            qty: Number(obj.qty) || 0,
+            status: obj.status || "available",
+            notes: obj.notes,
+            img: obj.img ? obj.img.split(",").map(s => s.trim()).filter(Boolean) : []
+          };
+        });
+
+        document.getElementById("stockCount").textContent =
+          lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
+
+        renderGrid("all");
+
+      } catch (err) {
+        grid.innerHTML = '<div class="grid-empty">Помилка завантаження каталогу. Спробуйте оновити сторінку.</div>';
+        console.error("Sheets error:", err);
+      }
+    }
+
+    loadFromSheets();
   </script>
 </body>
 
