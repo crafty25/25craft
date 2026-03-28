@@ -17,12 +17,12 @@
   <meta name="robots" content="index, follow">
 
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TFHX8F3W28"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-45T858F88Z"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-TFHX8F3W28');
+    gtag('config', 'G-45T858F88Z');
   </script>
 
   <link
@@ -466,19 +466,44 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+
+    .card-name-wrap {
+      flex: 1;
+      min-width: 0;
     }
 
     .card-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 19px;
       letter-spacing: 0.3px;
+      line-height: 1;
+    }
+
+    .card-price-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .card-old-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--muted2);
+      text-decoration: line-through;
+      text-decoration-color: #e05555;
+      line-height: 1;
     }
 
     .card-price {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
       color: var(--accent);
+      line-height: 1;
     }
 
     .card-tags {
@@ -489,12 +514,12 @@
     }
 
     .tag {
-      font-size: 9px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.5px;
       padding: 2px 7px;
       border: 1px solid var(--border2);
       color: var(--muted2);
+      white-space: nowrap;
     }
 
     .tag.sinking {
@@ -513,13 +538,11 @@
     }
 
     .card-color {
-      font-size: 11px;
-      color: var(--muted);
-      font-style: italic;
+      display: none;
     }
 
     .card-notes {
-      font-size: 11px;
+      font-size: 14px;
       color: var(--muted2);
       margin-top: 5px;
       line-height: 1.45;
@@ -533,7 +556,7 @@
       border: 1px solid var(--border2);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
       cursor: pointer;
@@ -1067,14 +1090,14 @@
     }
 
     .trust-desc {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted2);
       line-height: 1.5;
     }
 
     /* quantity badge on card */
     .qty-badge {
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 1px;
       color: var(--accent2);
       margin-top: 5px;
@@ -1350,7 +1373,7 @@
       <div>
         <div class="trust-label">25craft — handmade lures</div>
         <div class="trust-desc">
-          <Багаторічний досвід у створенні риболовних приманко>
+          Багаторічний досвід у створенні приманок.
         </div>
       </div>
     </div>
@@ -1508,6 +1531,7 @@
         type: "Slow Sinking",
         color: "Green",
         price: 450,
+        oldPrice: 500,
         qty: 1,
         status: "available", // available | sold | reserved
         notes: "занурення до 30см",
@@ -1700,15 +1724,19 @@
       </div>
       <div class="card-body">
         <div class="card-row1">
-          <div class="card-name">${l.name}</div>
-          <div class="card-price">${l.price} грн</div>
+          <div class="card-name-wrap">
+            <div class="card-name">${l.name}</div>
+          </div>
+          <div class="card-price-wrap">
+            ${l.oldPrice ? `<div class="card-old-price">${l.oldPrice} грн</div>` : ''}
+            <div class="card-price">${l.price} грн</div>
+          </div>
         </div>
         <div class="card-tags">
           <span class="tag">${l.weight}</span>
           <span class="tag">${l.length}</span>
           <span class="tag ${typeTagClass[l.type] || ''}">${l.type}</span>
         </div>
-        <div class="card-color">${l.color}</div>
         ${l.notes ? `<div class="card-notes">${l.notes}</div>` : ''}
         ${l.status === 'available' ? `<div class="qty-badge">В наявності: ${l.qty} шт</div>` : ''}
         <button
