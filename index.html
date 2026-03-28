@@ -1977,9 +1977,8 @@ ${orderLines}
       const lure = lures.find(l => l.id === id);
       const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
       if (!imgs.length) return;
-      const total = imgs.length;
-      sliderState[id] = ((sliderState[id] || 0) + dir + total) % total;
-      applySlide(id, total, true);
+      sliderState[id] = ((sliderState[id] || 0) + dir + imgs.length) % imgs.length;
+      applySlide(id, imgs.length);
     }
 
     function slideTo(id, idx, e) {
@@ -1987,19 +1986,14 @@ ${orderLines}
       const lure = lures.find(l => l.id === id);
       const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
       sliderState[id] = idx;
-      applySlide(id, imgs.length, true);
+      applySlide(id, imgs.length);
     }
 
-    function applySlide(id, total, animated = true) {
+    function applySlide(id, total) {
       const track = document.getElementById(`track_${id}`);
       const dotsEl = document.getElementById(`dots_${id}`);
       const idx = sliderState[id] || 0;
-      if (track) {
-        track.style.transition = animated
-          ? 'transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-          : 'none';
-        track.style.transform = `translateX(-${idx * 100}%)`;
-      }
+      if (track) track.style.transform = `translateX(-${idx * 100}%)`;
       if (dotsEl) {
         dotsEl.querySelectorAll('.slider-dot').forEach((d, i) =>
           d.classList.toggle('active', i === idx)
@@ -2007,7 +2001,7 @@ ${orderLines}
       }
     }
 
-    // ── CARD SLIDER SWIPE ──
+    // ── TOUCH SWIPE — только мобильный, только свайп ──
     function initCardSwipe(id) {
       const slider = document.getElementById(`slider_${id}`);
       if (!slider) return;
@@ -2017,110 +2011,37 @@ ${orderLines}
       const total = imgs.length;
       if (total < 2) return;
 
-      const track = document.getElementById(`track_${id}`);
-
-      function getOffsetPx() {
-        const m = track.style.transform.match(/translateX\((-?[\d.]+)/);
-        return m ? parseFloat(m[1]) : -(sliderState[id] || 0) * slider.offsetWidth;
-      }
-
-      function commit(dx) {
-        const w = slider.offsetWidth;
-        const cur = sliderState[id] || 0;
-        const THRESH = w * 0.2;
-        let next = cur;
-        if (dx < -THRESH) next = (cur + 1) % total;
-        else if (dx > THRESH) next = (cur - 1 + total) % total;
-        sliderState[id] = next;
-        applySlide(id, total, true);
-      }
-
-      // ── Touch ──
-      let tStartX = 0, tStartY = 0, tLastX = 0;
-      let tActive = false, tHoriz = null, tOriginPx = 0;
-      let tVelocityX = 0, tLastTime = 0;
+      let startX = 0, startY = 0, dirLocked = false, isHoriz = false;
 
       slider.addEventListener('touchstart', e => {
-        const t = e.touches[0];
-        tStartX = tLastX = t.clientX;
-        tStartY = t.clientY;
-        tActive = true;
-        tHoriz = null;
-        tVelocityX = 0;
-        tLastTime = Date.now();
-        tOriginPx = getOffsetPx();
-        track.style.transition = 'none';
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        dirLocked = false;
+        isHoriz = false;
       }, { passive: true });
 
       slider.addEventListener('touchmove', e => {
-        if (!tActive) return;
-        const t = e.touches[0];
-        const dx = t.clientX - tStartX;
-        const dy = t.clientY - tStartY;
-        if (tHoriz === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
-          tHoriz = Math.abs(dx) >= Math.abs(dy);
+        if (dirLocked && !isHoriz) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (!dirLocked && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+          dirLocked = true;
+          isHoriz = Math.abs(dx) > Math.abs(dy);
         }
-        if (!tHoriz) return;
-        e.preventDefault();
-        const now = Date.now();
-        tVelocityX = (t.clientX - tLastX) / Math.max(now - tLastTime, 1);
-        tLastX = t.clientX;
-        tLastTime = now;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(${tOriginPx + dx}px)`;
+        if (isHoriz) e.preventDefault();
       }, { passive: false });
 
       slider.addEventListener('touchend', e => {
-        if (!tActive || !tHoriz) { tActive = false; return; }
-        tActive = false;
-        const dx = e.changedTouches[0].clientX - tStartX;
-        if (Math.abs(tVelocityX) > 0.4) {
-          const cur = sliderState[id] || 0;
-          sliderState[id] = tVelocityX < 0
-            ? (cur + 1) % total
-            : (cur - 1 + total) % total;
-          applySlide(id, total, true);
-        } else {
-          commit(dx);
-        }
+        if (!isHoriz) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) < 40) return;
+        const cur = sliderState[id] || 0;
+        sliderState[id] = dx < 0
+          ? (cur + 1) % total
+          : (cur - 1 + total) % total;
+        applySlide(id, total);
       }, { passive: true });
-
-      // ── Mouse ──
-      let mActive = false, mStartX = 0, mOriginPx = 0, mDx = 0, mMoved = false;
-
-      slider.addEventListener('mousedown', e => {
-        if (e.button !== 0) return;
-        mActive = true;
-        mStartX = e.clientX;
-        mDx = 0;
-        mMoved = false;
-        mOriginPx = getOffsetPx();
-        track.style.transition = 'none';
-        e.preventDefault();
-      });
-
-      slider.addEventListener('mousemove', e => {
-        if (!mActive) return;
-        mDx = e.clientX - mStartX;
-        mMoved = Math.abs(mDx) > 4;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(${mOriginPx + mDx}px)`;
-      });
-
-      slider.addEventListener('mouseleave', () => {
-        if (!mActive) return;
-        mActive = false;
-        commit(mDx);
-      });
-
-      slider.addEventListener('mouseup', () => {
-        if (!mActive) return;
-        mActive = false;
-        if (mMoved) commit(mDx);
-        else applySlide(id, total, false);
-      });
     }
-
 
     // ── FILTERS ──
     document.querySelectorAll(".filter-btn").forEach(btn => {
