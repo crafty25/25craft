@@ -1110,6 +1110,40 @@
       margin-top: 5px;
     }
 
+    /* ── ABOUT SECTION ── */
+    .about-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 64px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-text {
+      max-width: 720px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .about-text p + p {
+      margin-top: 20px;
+    }
+
+    .about-text a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .about-text a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .about-section {
+        padding: 40px 16px;
+      }
+    }
+
     /* ── FOOTER ── */
     footer {
       padding: 32px 40px;
@@ -1373,6 +1407,14 @@
     <div class="grid" id="grid"></div>
   </div>
 
+  <!-- ABOUT SECTION -->
+  <div class="about-section">
+    <div class="about-text">
+      <p>Кожну приманку я роблю сам — від заготовки до останнього шару лаку. Це не масове виробництво. Кожен воблер проходить через багато етапів шліфування, ґрунтування, фарбування та покриття лаком. На це йдуть дні, а іноді й тижні. Саме тому кожна приманка виходить унікальною — зі своїм характером і поведінкою.</p>
+      <p>За роки захоплення рибалки з усієї України та не тільки довіряли моїм приманкам, а більшість із них стали постійними клієнтами. Живі фото та відгуки — в моєму Instagram <a href="https://instagram.com/25_craft" target="_blank" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_about'})">@25_craft</a>. Також я завжди радий обговорити створення нового унікального воблера спеціально під ваш стиль ловлі та умови.</p>
+    </div>
+  </div>
+
   <!-- TRUST BLOCK -->
   <div class="trust">
     <div class="trust-item">
@@ -1556,6 +1598,7 @@
         type: "Slow Sinking",
         color: "Green",
         price: 450,
+        oldPrice: 500,
         qty:3,
         status: "available", // available | sold | reserved
         notes: "Ціна указана за 1шт",
@@ -1571,8 +1614,8 @@
         weight: "2.4g",
         length: "35mm",
         type: "Slow Sinking",
-        color: "Green",
-        price: 550,
+        price: 500,
+        oldPrice: 600,
         qty:3,
         status: "available", // available | sold | reserved
         notes: "занурення до 30-40см",
@@ -1591,8 +1634,8 @@
         weight: "2.4g",
         length: "35mm",
         type: "Slow Sinking",
-        color: "Green",
         price: 550,
+        oldPrice: 600,
         qty:1,
         status: "available", // available | sold | reserved
         notes: "занурення до 30-40см",
@@ -1611,6 +1654,7 @@
         type: "Slow Sinking",
         color: "Green",
         price: 550,
+        oldPrice: 600,
         qty:1,
         status: "available", // available | sold | reserved
         notes: "занурення до 30-40см",
@@ -1626,8 +1670,8 @@
         weight: "2.4g",
         length: "35mm",
         type: "Slow Sinking",
-        color: "Green",
         price: 550,
+        oldPrice: 600,
         qty:1,
         status: "available", // available | sold | reserved
         notes: "занурення до 30-40см",
