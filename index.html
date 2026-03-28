@@ -15,6 +15,16 @@
   <meta property="og:image" content="https://www.instagram.com/25_craft/">
   <meta property="og:url" content="https://25craft.com.ua/">
   <meta name="robots" content="index, follow">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-45T858F88Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-45T858F88Z');
+  </script>
+
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
     rel="stylesheet">
@@ -1364,7 +1374,8 @@
         <div class="trust-label">Живі фото та відгуки</div>
         <div class="trust-desc">Мій профіль в Instagram <a
             href="https://instagram.com/25_craft" target="_blank"
-            style="color:var(--accent);text-decoration:none">@25_craft</a></div>
+            style="color:var(--accent);text-decoration:none"
+            onclick="gtag('event','click',{event_category:'social',event_label:'instagram_trust'})">@25_craft</a></div>
       </div>
     </div>
   </div>
@@ -1375,7 +1386,7 @@
       <div class="footer-note">Риболовні приманки ручної роботи · Україна</div>
       <div class="footer-note" style="margin-top:6px">© 2026 25craft · Всі права захищені</div>
     </div>
-    <a href="https://instagram.com/25_craft" target="_blank" class="footer-ig">@25_craft</a>
+    <a href="https://instagram.com/25_craft" target="_blank" class="footer-ig" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_footer'})">@25_craft</a>
   </footer>
 
   <!-- CUSTOM ORDER MODAL -->
@@ -1720,8 +1731,18 @@
 
       if (idx === -1) {
         cart.push(lure);
+        gtag('event', 'add_to_cart', {
+          currency: 'UAH',
+          value: lure.price,
+          items: [{ item_id: lure.id, item_name: lure.name, price: lure.price }]
+        });
       } else {
         cart.splice(idx, 1);
+        gtag('event', 'remove_from_cart', {
+          currency: 'UAH',
+          value: lure.price,
+          items: [{ item_id: lure.id, item_name: lure.name, price: lure.price }]
+        });
       }
 
       updateCartUI();
@@ -1790,6 +1811,12 @@
     function openOrder() {
       if (!cart.length) return;
       closeDrawer();
+
+      gtag('event', 'begin_checkout', {
+        currency: 'UAH',
+        value: calcTotal(),
+        items: cart.map(l => ({ item_id: l.id, item_name: l.name, price: l.price }))
+      });
 
       // Fill summary
       const summary = document.getElementById("orderSummary");
