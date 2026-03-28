@@ -179,7 +179,7 @@
         display: block;
         margin-top: 20px;
         width: 100%;
-        padding: 12px 18px;
+        padding: 14px 18px;
         background: var(--accent);
         border: 1px solid var(--accent);
         color: #0c0c0c;
@@ -195,6 +195,20 @@
         position: sticky;
         top: 0;
         z-index: 100;
+      }
+      /* Fix drawer height on iOS */
+      .drawer {
+        height: 100dvh;
+      }
+      /* Fix hero layout on mobile */
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px 20px 28px;
+      }
+      .hero-right {
+        text-align: left;
+        margin-top: 16px;
       }
     }
 
