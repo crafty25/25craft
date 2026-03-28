@@ -167,6 +167,31 @@
       border-color: var(--accent-dark);
     }
 
+    .hero-custom-order-btn {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .custom-order-btn {
+        display: none;
+      }
+      .hero-custom-order-btn {
+        display: block;
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px 18px;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        color: #0c0c0c;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+    }
+
     /* ── CUSTOM ORDER MODAL ── */
     .custom-order-overlay {
       position: fixed;
@@ -1250,6 +1275,7 @@
     <div>
       <div class="hero-title">HAND<br><em>MADE</em><br>LURES</div>
       <div class="hero-desc">Кожна приманка зроблена та налаштована вручну.<br>Авторський дизайн та колір</div>
+      <button class="hero-custom-order-btn" onclick="openCustomOrder()">Індивідуальне замовлення</button>
     </div>
     <div class="hero-right">
       <div class="hero-stat" id="stockCount">0</div>
@@ -1647,6 +1673,7 @@
       </div>
     `;
         grid.appendChild(card);
+        if (imgs.length > 1) initCardSwipe(l.id);
       });
     }
 
@@ -1879,6 +1906,33 @@ ${orderLines}
           d.classList.toggle("active", i === idx);
         });
       }
+    }
+
+    // ── CARD SLIDER TOUCH SWIPE ──
+    function initCardSwipe(id) {
+      const slider = document.getElementById(`slider_${id}`);
+      if (!slider) return;
+      let startX = 0, isDragging = false;
+      slider.addEventListener("touchstart", e => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+      slider.addEventListener("touchmove", e => {
+        if (!isDragging) return;
+        if (Math.abs(e.touches[0].clientX - startX) > 10) e.preventDefault();
+      }, { passive: false });
+      slider.addEventListener("touchend", e => {
+        if (!isDragging) return;
+        isDragging = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        const lure = lures.find(l => l.id === id);
+        const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
+        if (Math.abs(dx) > 40 && imgs.length > 1) {
+          sliderState[id] = sliderState[id] || 0;
+          sliderState[id] = (sliderState[id] + (dx < 0 ? 1 : -1) + imgs.length) % imgs.length;
+          applySlide(id, imgs.length);
+        }
+      }, { passive: true });
     }
 
     // ── FILTERS ──
