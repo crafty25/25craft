@@ -591,7 +591,9 @@
     .slider-track {
       display: flex;
       height: 100%;
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+      user-select: none;
     }
 
     .slider-slide {
@@ -1976,7 +1978,7 @@ ${orderLines}
       if (!imgs.length) return;
       sliderState[id] = sliderState[id] || 0;
       sliderState[id] = (sliderState[id] + dir + imgs.length) % imgs.length;
-      applySlide(id, imgs.length);
+      applySlide(id, imgs.length, true);
     }
 
     function slideTo(id, idx, e) {
@@ -1984,14 +1986,19 @@ ${orderLines}
       const lure = lures.find(l => l.id === id);
       const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
       sliderState[id] = idx;
-      applySlide(id, imgs.length);
+      applySlide(id, imgs.length, true);
     }
 
-    function applySlide(id, total) {
+    function applySlide(id, total, animated = true) {
       const track = document.getElementById(`track_${id}`);
       const dotsEl = document.getElementById(`dots_${id}`);
       const idx = sliderState[id] || 0;
-      if (track) track.style.transform = `translateX(-${idx * 100}%)`;
+      if (track) {
+        track.style.transition = animated
+          ? 'transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          : 'none';
+        track.style.transform = `translateX(-${idx * 100}%)`;
+      }
       if (dotsEl) {
         dotsEl.querySelectorAll(".slider-dot").forEach((d, i) => {
           d.classList.toggle("active", i === idx);
@@ -2003,27 +2010,150 @@ ${orderLines}
     function initCardSwipe(id) {
       const slider = document.getElementById(`slider_${id}`);
       if (!slider) return;
-      let startX = 0, isDragging = false;
+
+      let startX = 0, startY = 0;
+      let currentX = 0;
+      let isDragging = false;
+      let isHorizontal = null;
+      let startTime = 0;
+      let lastX = 0;
+      let velocity = 0;
+      let rafId = null;
+
+      const lure = lures.find(l => l.id === id);
+      const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
+      const total = imgs.length;
+
+      function getTrack() { return document.getElementById(`track_${id}`); }
+      function getSliderWidth() { return slider.offsetWidth; }
+
+      function setTrackX(x, animated = false) {
+        const track = getTrack();
+        if (!track) return;
+        track.style.transition = animated
+          ? 'transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          : 'none';
+        track.style.transform = `translateX(${x}px)`;
+      }
+
+      function snapToIndex(idx, vel = 0) {
+        sliderState[id] = Math.max(0, Math.min(total - 1, idx));
+        applySlide(id, total, true);
+      }
+
       slider.addEventListener("touchstart", e => {
-        startX = e.touches[0].clientX;
+        if (rafId) cancelAnimationFrame(rafId);
+        const touch = e.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+        lastX = touch.clientX;
+        startTime = Date.now();
         isDragging = true;
+        isHorizontal = null;
+        velocity = 0;
+        currentX = -(sliderState[id] || 0) * getSliderWidth();
+        // снимаем transition для живого drag
+        const track = getTrack();
+        if (track) track.style.transition = 'none';
       }, { passive: true });
+
       slider.addEventListener("touchmove", e => {
         if (!isDragging) return;
-        if (Math.abs(e.touches[0].clientX - startX) > 10) e.preventDefault();
-      }, { passive: false });
-      slider.addEventListener("touchend", e => {
-        if (!isDragging) return;
-        isDragging = false;
-        const dx = e.changedTouches[0].clientX - startX;
-        const lure = lures.find(l => l.id === id);
-        const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
-        if (Math.abs(dx) > 40 && imgs.length > 1) {
-          sliderState[id] = sliderState[id] || 0;
-          sliderState[id] = (sliderState[id] + (dx < 0 ? 1 : -1) + imgs.length) % imgs.length;
-          applySlide(id, imgs.length);
+        const touch = e.touches[0];
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+
+        // определяем направление один раз
+        if (isHorizontal === null) {
+          if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+            isHorizontal = Math.abs(dx) > Math.abs(dy);
+          }
         }
+
+        if (!isHorizontal) return;
+        e.preventDefault();
+
+        velocity = touch.clientX - lastX;
+        lastX = touch.clientX;
+
+        const w = getSliderWidth();
+        const base = -(sliderState[id] || 0) * w;
+        // резина на краях
+        let offset = base + dx;
+        const maxOffset = 0;
+        const minOffset = -(total - 1) * w;
+        if (offset > maxOffset) offset = maxOffset + (offset - maxOffset) * 0.25;
+        if (offset < minOffset) offset = minOffset + (offset - minOffset) * 0.25;
+
+        setTrackX(offset, false);
+      }, { passive: false });
+
+      slider.addEventListener("touchend", e => {
+        if (!isDragging || !isHorizontal) { isDragging = false; return; }
+        isDragging = false;
+
+        const touch = e.changedTouches[0];
+        const dx = touch.clientX - startX;
+        const dt = Date.now() - startTime;
+        const w = getSliderWidth();
+        const current = sliderState[id] || 0;
+
+        // порог: либо быстрый флик (velocity), либо долгий drag > 30%
+        const isFastFlick = Math.abs(velocity) > 8 && dt < 300;
+        const isBigDrag = Math.abs(dx) > w * 0.3;
+
+        let next = current;
+        if (isFastFlick || isBigDrag) {
+          next = dx < 0
+            ? Math.min(current + 1, total - 1)
+            : Math.max(current - 1, 0);
+        }
+
+        snapToIndex(next, velocity);
       }, { passive: true });
+
+      // поддержка мыши для десктопа
+      let mouseDown = false;
+      let mouseStartX = 0;
+
+      slider.addEventListener("mousedown", e => {
+        mouseDown = true;
+        mouseStartX = e.clientX;
+        currentX = -(sliderState[id] || 0) * getSliderWidth();
+        const track = getTrack();
+        if (track) track.style.transition = 'none';
+        e.preventDefault();
+      });
+
+      window.addEventListener("mousemove", e => {
+        if (!mouseDown) return;
+        const dx = e.clientX - mouseStartX;
+        const w = getSliderWidth();
+        const base = -(sliderState[id] || 0) * w;
+        let offset = base + dx;
+        const minOffset = -(total - 1) * w;
+        if (offset > 0) offset = offset * 0.25;
+        if (offset < minOffset) offset = minOffset + (offset - minOffset) * 0.25;
+        setTrackX(offset, false);
+        velocity = dx;
+      });
+
+      window.addEventListener("mouseup", e => {
+        if (!mouseDown) return;
+        mouseDown = false;
+        const dx = e.clientX - mouseStartX;
+        const w = getSliderWidth();
+        const current = sliderState[id] || 0;
+        const isBigDrag = Math.abs(dx) > w * 0.25;
+        const isFastFlick = Math.abs(velocity) > 5;
+        let next = current;
+        if (isBigDrag || isFastFlick) {
+          next = dx < 0
+            ? Math.min(current + 1, total - 1)
+            : Math.max(current - 1, 0);
+        }
+        snapToIndex(next);
+      });
     }
 
     // ── FILTERS ──
