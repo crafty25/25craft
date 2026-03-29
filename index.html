@@ -12,21 +12,64 @@
   <meta property="og:title" content="25craft — Handmade Lures">
   <meta property="og:description"
     content="Рибальські приманки ручної роботи. Унікальне розфарбування, перевірено на рибалці.">
-  <meta property="og:image" content="https://www.instagram.com/25_craft/">
+  <meta property="og:image" content="https://25craft.com.ua/Images/og-image.webp">
   <meta property="og:url" content="https://25craft.com.ua/">
   <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://25craft.com.ua/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:site_name" content="25craft">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="25craft — Handmade Lures">
+  <meta name="twitter:description" content="Рибальські приманки ручної роботи. Унікальне розфарбування, перевірено на рибалці.">
+  <meta name="twitter:image" content="https://25craft.com.ua/Images/og-image.webp">
+
+  <!-- Theme color для мобільних браузерів -->
+  <meta name="theme-color" content="#0c0c0c">
+
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230c0c0c'/><text x='90' y='130' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='100' fill='%23c8f542' letter-spacing='-4'>25</text></svg>">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230c0c0c'/><text x='16' y='24' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='20' fill='%23c8f542' letter-spacing='-1'>25</text></svg>">
   <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230c0c0c'/><text x='16' y='24' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='20' fill='%23c8f542' letter-spacing='-1'>25</text></svg>">
 
+  <!-- JSON-LD: Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "25craft — Handmade Lures",
+    "description": "Риболовні приманки ручної роботи. Індивідуальні замовлення, унікальний дизайн. Перевірено рибалками України.",
+    "url": "https://25craft.com.ua/",
+    "logo": "https://25craft.com.ua/Images/og-image.webp",
+    "image": "https://25craft.com.ua/Images/og-image.webp",
+    "telephone": "",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "UA"
+    },
+    "sameAs": [
+      "https://instagram.com/25_craft",
+      "https://www.facebook.com/michael.polyah.5"
+    ],
+    "currenciesAccepted": "UAH",
+    "paymentAccepted": "Cash, Credit Card",
+    "openingHours": "Mo-Su 00:00-23:59"
+  }
+  </script>
+
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-45T858F88Z"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TFHX8F3W28"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-45T858F88Z');
+    gtag('config', 'G-TFHX8F3W28');
   </script>
 
   <!-- Preconnect для швидшого з'єднання з Google Fonts -->
@@ -1411,9 +1454,10 @@
   </header>
 
   <!-- HERO -->
+  <main>
   <div class="hero">
     <div>
-      <div class="hero-title">HAND<br><em>MADE</em><br>LURES</div>
+      <h1 class="hero-title">HAND<br><em>MADE</em><br>LURES</h1>
       <div class="hero-desc">Кожна приманка зроблена та налаштована вручну.<br>Авторський дизайн та колір</div>
       <button class="hero-custom-order-btn" onclick="openCustomOrder()">Індивідуальне замовлення</button>
     </div>
@@ -1424,13 +1468,13 @@
   </div>
 
   <!-- FILTERS -->
-  <div class="filters">
+  <nav class="filters" aria-label="Фільтр каталогу">
     <button class="filter-btn active" data-filter="all">Всі</button>
     <!-- <button class="filter-btn" data-filter="Sinking">Sinking</button>
   <button class="filter-btn" data-filter="Floating">Floating</button>
   <button class="filter-btn" data-filter="Suspending">Suspending</button> -->
     <button class="filter-btn" data-filter="available">Тільки в наявності</button>
-  </div>
+  </nav>
 
   <!-- GRID -->
   <div class="grid-wrap">
@@ -1441,7 +1485,7 @@
   <div class="about-section">
     <div class="about-text">
       <p>Кожну приманку я роблю самостійно — від заготовки до останнього шару лаку. Це не масове виробництво. Кожен воблер проходить через багато етапів шліфування, ґрунтування, фарбування та покриття лаком. На це йдуть дні, а іноді й тижні. Саме тому кожна приманка виходить унікальною — зі своїм характером і поведінкою.</p>
-      <p>За роки захоплення рибалки з усієї України та не тільки довіряли моїм приманкам, а більшість із них стали постійними клієнтами. Живі фото та відгуки — в моєму Instagram <a href="https://instagram.com/25_craft" target="_blank" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_about'})">@25_craft</a>. Також я завжди радий обговорити створення нового унікального воблера спеціально під ваш стиль ловлі та умови.</p>
+      <p>За роки захоплення рибалки з усієї України та не тільки довіряли моїм приманкам, а більшість із них стали постійними клієнтами. Живі фото та відгуки — в моєму Instagram <a href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_about'})">@25_craft</a>. Також я завжди радий обговорити створення нового унікального воблера спеціально під ваш стиль ловлі та умови.</p>
     </div>
   </div>
 
@@ -1475,12 +1519,14 @@
       <div>
         <div class="trust-label">Живі фото та відгуки</div>
         <div class="trust-desc">Мій профіль в Instagram <a
-            href="https://instagram.com/25_craft" target="_blank"
+            href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer"
             style="color:var(--accent);text-decoration:none"
             onclick="gtag('event','click',{event_category:'social',event_label:'instagram_trust'})">@25_craft</a></div>
       </div>
     </div>
   </div>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
