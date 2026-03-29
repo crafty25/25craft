@@ -1631,30 +1631,30 @@
         card.innerHTML = `
       <div class="card-img-wrap">
         ${imgHtml}
-        <span class="status-pill ${l.status}">${statusLabel[l.status]}</span>
+        <span class="status-pill ${esc(l.status)}">${statusLabel[l.status] || ''}</span>
       </div>
       <div class="card-body">
         <div class="card-row1">
           <div class="card-name-wrap">
-            <div class="card-name">${l.name}</div>
+            <div class="card-name">${esc(l.name)}</div>
           </div>
           <div class="card-price-wrap">
-            ${l.oldPrice ? `<div class="card-old-price">${l.oldPrice} грн</div>` : ''}
-            <div class="card-price">${l.price} грн</div>
+            ${l.oldPrice ? `<div class="card-old-price">${esc(String(l.oldPrice))} грн</div>` : ''}
+            <div class="card-price">${esc(String(l.price))} грн</div>
           </div>
         </div>
         <div class="card-tags">
-          <span class="tag">${l.weight}</span>
-          <span class="tag">${l.length}</span>
-          <span class="tag ${typeTagClass[l.type] || ''}">${l.type}</span>
+          <span class="tag">${esc(l.weight)}</span>
+          <span class="tag">${esc(l.length)}</span>
+          <span class="tag ${typeTagClass[l.type] || ''}">${esc(l.type)}</span>
         </div>
-        ${l.notes ? `<div class="card-notes">${l.notes}</div>` : ''}
-        ${l.status === 'available' ? `<div class="qty-badge">В наявності: ${l.qty} шт</div>` : ''}
+        ${l.notes ? `<div class="card-notes">${esc(l.notes)}</div>` : ''}
+        ${l.status === 'available' ? `<div class="qty-badge">В наявності: ${esc(String(l.qty))} шт</div>` : ''}
         <button
           class="card-add-btn ${inCart ? 'in-cart' : ''}"
-          onclick="toggleCart(${l.id})"
+          onclick="toggleCart(${Number(l.id)})"
           ${sold ? 'disabled' : ''}
-          id="addBtn_${l.id}"
+          id="addBtn_${Number(l.id)}"
         >${sold ? 'Недоступно' : inCart ? '✓ В кошику' : 'Додати до кошика'}</button>
       </div>
     `;
@@ -2105,6 +2105,17 @@ ${orderLines}
         const dx = e.changedTouches[0].clientX - startX;
         if (Math.abs(dx) > 50 && lbImgs.length > 1) lightboxDir(dx < 0 ? 1 : -1);
       };
+    }
+
+    // ── SECURITY: екранування HTML для даних з Google Sheets ──
+    function esc(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
     }
 
     // ── INIT ──
