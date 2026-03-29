@@ -1853,7 +1853,7 @@
 
       // Build message
       const orderLines = cart.map((l, i) =>
-        `  ${i + 1}. ${l.name} — ${l.weight}, ${l.length}, ${l.type}\n     Колір: ${l.color}\n     Ціна: ${l.price} грн`
+        `  ${i + 1}. [ID: ${l.id}] ${l.name} — ${l.weight}, ${l.length}, ${l.type}${l.color ? `\n     Колір: ${l.color}` : ""}\n     Ціна: ${l.price} грн`
       ).join("\n");
 
       const message =
