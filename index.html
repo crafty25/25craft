@@ -29,9 +29,20 @@
     gtag('config', 'G-45T858F88Z');
   </script>
 
+  <!-- Preconnect для швидшого з'єднання з Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Асинхронне завантаження шрифтів — не блокує рендеринг -->
   <link
+    rel="preload"
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
-    rel="stylesheet">
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet">
+  </noscript>
   <style>
     :root {
       --bg: #0c0c0c;
@@ -1720,15 +1731,15 @@
         return `
     <div class="drawer-item">
       ${firstImg
-            ? `<img class="drawer-item-img" src="${firstImg}" alt="${l.name}">`
+            ? `<img class="drawer-item-img" src="${esc(firstImg)}" alt="${esc(l.name)}">`
             : `<div class="drawer-item-img">🎣</div>`
           }
       <div class="drawer-item-info">
-        <div class="drawer-item-name">${l.name}</div>
-        <div class="drawer-item-specs">${l.weight} · ${l.length} · ${l.type}</div>
+        <div class="drawer-item-name">${esc(l.name)}</div>
+        <div class="drawer-item-specs">${esc(l.weight)} · ${esc(l.length)} · ${esc(l.type)}</div>
       </div>
-      <div class="drawer-item-price">${l.price} грн</div>
-      <button class="drawer-item-remove" onclick="removeFromCart(${l.id})" title="Видалити">✕</button>
+      <div class="drawer-item-price">${esc(String(l.price))} грн</div>
+      <button class="drawer-item-remove" onclick="removeFromCart(${Number(l.id)})" title="Видалити">✕</button>
     </div>
   `}).join("");
     }
@@ -1763,8 +1774,8 @@
     <div class="order-summary-title">Ваше замовлення</div>
     ${cart.map(l => `
       <div class="order-summary-item">
-        <span>${l.name} (${l.weight}, ${l.type})</span>
-        <span>${l.price} грн</span>
+        <span>${esc(l.name)} (${esc(l.weight)}, ${esc(l.type)})</span>
+        <span>${esc(String(l.price))} грн</span>
       </div>
     `).join("")}
     <div class="order-summary-item" style="margin-top:8px;padding-top:8px;border-top:1px solid #252525;font-weight:400;color:#eeebe4">
