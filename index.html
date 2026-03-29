@@ -1622,17 +1622,20 @@
         const imgs = Array.isArray(l.img) ? l.img.filter(Boolean) : (l.img ? [l.img] : []);
 
         let imgHtml = "";
+        const isFirst = items.indexOf(l) < 2; // перші 2 картки — eager + high priority
+        const loadAttr = isFirst ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
+
         if (imgs.length === 0) {
           imgHtml = `<div class="card-img-placeholder">🎣</div>`;
         } else if (imgs.length === 1) {
-          imgHtml = `<div class="card-slider" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${imgs[0]}" alt="${l.name}" loading="lazy"></div></div>`;
+          imgHtml = `<div class="card-slider" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${esc(imgs[0])}" alt="${esc(l.name)}" ${loadAttr}></div></div>`;
         } else {
-          const slides = imgs.map(src => `<img class="slider-slide" src="${src}" alt="${l.name}" loading="lazy">`).join("");
+          const slides = imgs.map((src, i) => `<img class="slider-slide" src="${esc(src)}" alt="${esc(l.name)}" ${i === 0 ? loadAttr : 'loading="lazy"'}>`).join("");
           const dots = imgs.map((_, i) => `<span class="slider-dot ${i === 0 ? 'active' : ''}" onclick="slideTo(${l.id},${i},event)"></span>`).join("");
           imgHtml = `
         <div class="card-slider" id="slider_${l.id}">
           <div class="slider-track" id="track_${l.id}">${slides}</div>
-          <div style="position:absolute;inset:0;z-index:1;cursor:zoom-in" onclick="openLightboxById(${l.id}, sliderState[${l.id}]||0)"></div>
+          <div style="position:absolute;inset:0;z-index:1;" onclick="openLightboxById(${l.id}, sliderState[${l.id}]||0)"></div>
           <button class="slider-btn prev" style="z-index:3" onclick="slideDir(${l.id},-1,event)">‹</button>
           <button class="slider-btn next" style="z-index:3" onclick="slideDir(${l.id},1,event)">›</button>
           <div class="slider-dots" style="z-index:3" id="dots_${l.id}">${dots}</div>
@@ -2130,17 +2133,42 @@ ${orderLines}
     }
 
     // ── INIT ──
+    const CACHE_KEY = "25craft_lures";
+    const CACHE_TTL = 5 * 60 * 1000; // 5 хвилин
+
     async function loadFromSheets() {
       const grid = document.getElementById("grid");
-      grid.innerHTML = '<div class="grid-empty">Завантаження...</div>';
 
+      // Показуємо кешовані дані миттєво
+      try {
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const { data, ts } = JSON.parse(cached);
+          if (Date.now() - ts < CACHE_TTL) {
+            lures = data;
+            document.getElementById("stockCount").textContent =
+              lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
+            renderGrid("all");
+            // Оновлюємо у фоні
+            fetchFromSheets(false);
+            return;
+          }
+        }
+      } catch {}
+
+      // Перший завантаження — показуємо індикатор
+      grid.innerHTML = '<div class="grid-empty">Завантаження...</div>';
+      await fetchFromSheets(true);
+    }
+
+    async function fetchFromSheets(updateUI) {
       try {
         const res = await fetch(SHEETS_URL);
         const data = await res.json();
         const rows = data.values || [];
-        const headers = rows[0]; // перший рядок — заголовки
+        const headers = rows[0];
 
-        lures = rows.slice(1).map(row => {
+        const freshLures = rows.slice(1).map(row => {
           const obj = {};
           headers.forEach((h, i) => obj[h] = row[i] || "");
           return {
@@ -2159,13 +2187,24 @@ ${orderLines}
           };
         });
 
-        document.getElementById("stockCount").textContent =
-          lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
+        // Зберігаємо в кеш
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: freshLures, ts: Date.now() }));
+        } catch {}
 
-        renderGrid("all");
+        lures = freshLures;
+
+        if (updateUI) {
+          document.getElementById("stockCount").textContent =
+            lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
+          renderGrid("all");
+        }
 
       } catch (err) {
-        grid.innerHTML = '<div class="grid-empty">Помилка завантаження каталогу. Спробуйте оновити сторінку.</div>';
+        if (updateUI) {
+          document.getElementById("grid").innerHTML =
+            '<div class="grid-empty">Помилка завантаження каталогу. Спробуйте оновити сторінку.</div>';
+        }
         console.error("Sheets error:", err);
       }
     }
