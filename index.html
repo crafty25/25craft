@@ -1628,9 +1628,9 @@
         if (imgs.length === 0) {
           imgHtml = `<div class="card-img-placeholder">🎣</div>`;
         } else if (imgs.length === 1) {
-          imgHtml = `<div class="card-slider" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${esc(imgs[0])}" alt="${esc(l.name)}" ${loadAttr}></div></div>`;
+          imgHtml = `<div class="card-slider" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${esc(imgs[0])}" alt="${esc(l.name)}" width="800" height="600" ${loadAttr}></div></div>`;
         } else {
-          const slides = imgs.map((src, i) => `<img class="slider-slide" src="${esc(src)}" alt="${esc(l.name)}" ${i === 0 ? loadAttr : 'loading="lazy"'}>`).join("");
+          const slides = imgs.map((src, i) => `<img class="slider-slide" src="${esc(src)}" alt="${esc(l.name)}" width="800" height="600" ${i === 0 ? loadAttr : 'loading="lazy"'}>`).join("");
           const dots = imgs.map((_, i) => `<span class="slider-dot ${i === 0 ? 'active' : ''}" onclick="slideTo(${l.id},${i},event)"></span>`).join("");
           imgHtml = `
         <div class="card-slider" id="slider_${l.id}">
