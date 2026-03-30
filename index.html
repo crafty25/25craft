@@ -12,12 +12,80 @@
   <meta property="og:title" content="25craft — Handmade Lures">
   <meta property="og:description"
     content="Рибальські приманки ручної роботи. Унікальне розфарбування, перевірено на рибалці.">
-  <meta property="og:image" content="https://www.instagram.com/25_craft/">
-  <meta property="og:url" content="https://crafty25.github.io/25craft/">
+  <meta property="og:image" content="https://25craft.com.ua/Images/og-image.webp">
+  <meta property="og:url" content="https://25craft.com.ua/">
   <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://25craft.com.ua/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:site_name" content="25craft">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="25craft — Handmade Lures">
+  <meta name="twitter:description" content="Рибальські приманки ручної роботи. Унікальне розфарбування, перевірено на рибалці.">
+  <meta name="twitter:image" content="https://25craft.com.ua/Images/og-image.webp">
+
+  <!-- Theme color для мобільних браузерів -->
+  <meta name="theme-color" content="#0c0c0c">
+
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230c0c0c'/><text x='90' y='130' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='100' fill='%23c8f542' letter-spacing='-4'>25</text></svg>">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230c0c0c'/><text x='16' y='24' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='20' fill='%23c8f542' letter-spacing='-1'>25</text></svg>">
+  <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230c0c0c'/><text x='16' y='24' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='20' fill='%23c8f542' letter-spacing='-1'>25</text></svg>">
+
+  <!-- JSON-LD: Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "25craft — Handmade Lures",
+    "description": "Риболовні приманки ручної роботи. Індивідуальні замовлення, унікальний дизайн. Перевірено рибалками України.",
+    "url": "https://25craft.com.ua/",
+    "logo": "https://25craft.com.ua/Images/og-image.webp",
+    "image": "https://25craft.com.ua/Images/og-image.webp",
+    "telephone": "",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "UA"
+    },
+    "sameAs": [
+      "https://instagram.com/25_craft",
+      "https://www.facebook.com/michael.polyah.5"
+    ],
+    "currenciesAccepted": "UAH",
+    "paymentAccepted": "Cash, Credit Card",
+    "openingHours": "Mo-Su 00:00-23:59"
+  }
+  </script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VFVKSM7FHL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VFVKSM7FHL');
+  </script>
+
+  <!-- Preconnect для швидшого з'єднання з Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Асинхронне завантаження шрифтів — не блокує рендеринг -->
   <link
+    rel="preload"
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
-    rel="stylesheet">
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet">
+  </noscript>
   <style>
     :root {
       --bg: #0c0c0c;
@@ -141,6 +209,145 @@
     .cart-count.visible {
       display: flex;
     }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .custom-order-btn {
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      color: #0c0c0c;
+      padding: 8px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .custom-order-btn:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .hero-custom-order-btn {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .custom-order-btn {
+        display: none;
+      }
+      .hero-custom-order-btn {
+        display: block;
+        margin-top: 20px;
+        width: 100%;
+        padding: 14px 18px;
+        background: var(--accent);
+        border: 1px solid var(--accent);
+        color: #0c0c0c;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-align: center;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      /* Hero: stack vertically on mobile */
+      .hero {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+        padding: 32px 20px 28px !important;
+      }
+      .hero-right {
+        text-align: left !important;
+        margin-top: 20px;
+      }
+      .hero-stat {
+        font-size: 40px;
+      }
+    }
+
+    /* ── CUSTOM ORDER MODAL ── */
+    .custom-order-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      padding: 16px;
+    }
+
+    .custom-order-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .custom-order-modal {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      padding: 36px 32px 32px;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      transform: translateY(16px);
+      transition: transform 0.2s;
+    }
+
+    .custom-order-overlay.open .custom-order-modal {
+      transform: translateY(0);
+    }
+
+    .custom-order-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: transparent;
+      border: none;
+      color: var(--muted2);
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.15s;
+    }
+
+    .custom-order-close:hover { color: var(--text); }
+
+    .custom-order-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .custom-order-desc {
+      font-size: 12px;
+      color: var(--muted2);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .custom-order-success { display: none; text-align: center; padding: 16px 0; }
+    .custom-order-success.visible { display: block; }
+    .custom-order-form.hidden { display: none; }
 
     /* ── HERO ── */
     .hero {
@@ -317,19 +524,44 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+
+    .card-name-wrap {
+      flex: 1;
+      min-width: 0;
     }
 
     .card-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 19px;
       letter-spacing: 0.3px;
+      line-height: 1;
+    }
+
+    .card-price-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .card-old-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      color: var(--muted2);
+      text-decoration: line-through;
+      text-decoration-color: #e05555;
+      line-height: 1;
     }
 
     .card-price {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 20px;
       color: var(--accent);
+      line-height: 1;
     }
 
     .card-tags {
@@ -340,12 +572,12 @@
     }
 
     .tag {
-      font-size: 9px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.5px;
       padding: 2px 7px;
       border: 1px solid var(--border2);
       color: var(--muted2);
+      white-space: nowrap;
     }
 
     .tag.sinking {
@@ -364,9 +596,14 @@
     }
 
     .card-color {
-      font-size: 11px;
-      color: var(--muted);
-      font-style: italic;
+      display: none;
+    }
+
+    .card-notes {
+      font-size: 14px;
+      color: var(--muted2);
+      margin-top: 5px;
+      line-height: 1.45;
     }
 
     .card-add-btn {
@@ -377,7 +614,7 @@
       border: 1px solid var(--border2);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
       cursor: pointer;
@@ -412,7 +649,10 @@
     .slider-track {
       display: flex;
       height: 100%;
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .slider-slide {
@@ -501,6 +741,7 @@
       right: 0;
       width: min(440px, 100vw);
       height: 100vh;
+      height: 100dvh;
       background: var(--surface);
       border-left: 1px solid var(--border2);
       z-index: 201;
@@ -690,6 +931,21 @@
       width: 100%;
       max-width: 420px;
       padding: 36px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @media (max-width: 480px) {
+      .order-overlay {
+        align-items: center;
+        padding: 16px;
+      }
+      .order-modal {
+        padding: 24px 20px;
+        max-height: 80vh;
+        overflow-y: auto;
+        border-radius: 2px;
+      }
     }
 
     .order-modal-title {
@@ -865,6 +1121,7 @@
 
     /* ── TRUST BLOCK ── */
     .trust {
+      margin-top: 100px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1px;
@@ -894,17 +1151,51 @@
     }
 
     .trust-desc {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted2);
       line-height: 1.5;
     }
 
     /* quantity badge on card */
     .qty-badge {
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 1px;
       color: var(--accent2);
       margin-top: 5px;
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 64px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-text {
+      max-width: 720px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .about-text p + p {
+      margin-top: 20px;
+    }
+
+    .about-text a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .about-text a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .about-section {
+        padding: 40px 16px;
+      }
     }
 
     /* ── FOOTER ── */
@@ -916,7 +1207,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 1px;
+      margin-top: 0px;
       background: var(--surface);
     }
 
@@ -939,6 +1230,25 @@
     .footer-ig:hover {
       color: var(--accent);
       border-color: var(--accent);
+    }
+
+
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-social-link {
+      display: flex;
+      align-items: center;
+      opacity: 0.75;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .footer-social-link:hover {
+      opacity: 1;
+      transform: scale(1.12);
     }
 
     /* spinner */
@@ -1134,17 +1444,22 @@
         <div class="logo-sub">Handmade Lures</div>
       </div>
     </div>
-    <button class="cart-btn" onclick="openDrawer()">
-      🛒 Кошик
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
+    <div class="header-actions">
+      <button class="custom-order-btn" onclick="openCustomOrder()">Індивідуальне замовлення</button>
+      <button class="cart-btn" onclick="openDrawer()">
+        🛒 Кошик
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
   </header>
 
   <!-- HERO -->
+  <main>
   <div class="hero">
     <div>
-      <div class="hero-title">HAND<br><em>MADE</em><br>LURES</div>
+      <h1 class="hero-title">HAND<br><em>MADE</em><br>LURES</h1>
       <div class="hero-desc">Кожна приманка зроблена та налаштована вручну.<br>Авторський дизайн та колір</div>
+      <button class="hero-custom-order-btn" onclick="openCustomOrder()">Індивідуальне замовлення</button>
     </div>
     <div class="hero-right">
       <div class="hero-stat" id="stockCount">0</div>
@@ -1153,17 +1468,25 @@
   </div>
 
   <!-- FILTERS -->
-  <div class="filters">
+  <nav class="filters" aria-label="Фільтр каталогу">
     <button class="filter-btn active" data-filter="all">Всі</button>
     <!-- <button class="filter-btn" data-filter="Sinking">Sinking</button>
   <button class="filter-btn" data-filter="Floating">Floating</button>
   <button class="filter-btn" data-filter="Suspending">Suspending</button> -->
     <button class="filter-btn" data-filter="available">Тільки в наявності</button>
-  </div>
+  </nav>
 
   <!-- GRID -->
   <div class="grid-wrap">
     <div class="grid" id="grid"></div>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <div class="about-section">
+    <div class="about-text">
+      <p>Кожну приманку я роблю самостійно — від заготовки до останнього шару лаку. Це не масове виробництво. Кожен воблер проходить через багато етапів шліфування, ґрунтування, фарбування та покриття лаком. На це йдуть дні, а іноді й тижні. Саме тому кожна приманка виходить унікальною — зі своїм характером і поведінкою.</p>
+      <p>За роки захоплення рибалки з усієї України та не тільки довіряли моїм приманкам, а більшість із них стали постійними клієнтами. Живі фото та відгуки — в моєму Instagram <a href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_about'})">@25_craft</a>. Також я завжди радий обговорити створення нового унікального воблера спеціально під ваш стиль ловлі та умови.</p>
+    </div>
   </div>
 
   <!-- TRUST BLOCK -->
@@ -1173,7 +1496,7 @@
       <div>
         <div class="trust-label">25craft — handmade lures</div>
         <div class="trust-desc">
-          <Багаторічний досвід у створенні риболовних приманко><br>Кожний виріб - ручна робота від початку до кінця.
+          Багаторічний досвід у створенні приманок.
         </div>
       </div>
     </div>
@@ -1181,36 +1504,85 @@
       <div class="trust-icon">💳</div>
       <div>
         <div class="trust-label">Оплата після підтвердження</div>
-        <div class="trust-desc">Оплата на карту (Monobank/OTP)<br>після того як я підтверджу замовлення.</div>
+        <div class="trust-desc">Оплата на карту (Monobank/OTP)</div>
       </div>
     </div>
     <div class="trust-item">
       <div class="trust-icon">📦</div>
       <div>
-        <div class="trust-label">Доставка — обговорюється індивідуально</div>
-        <div class="trust-desc">Умови доставки узгоджуємо після оформлення замовлення.<br>Зв'яжусь з вами найближчим
-          часом.</div>
+        <div class="trust-label">Доставка</div>
+        <div class="trust-desc">Умови доставки узгоджуємо після оформлення замовлення.</div>
       </div>
     </div>
     <div class="trust-item">
       <div class="trust-icon">📸</div>
       <div>
         <div class="trust-label">Живі фото та відгуки</div>
-        <div class="trust-desc">Дивіться реальні фото та відгуки покупців<br>в Instagram <a
-            href="https://instagram.com/25_craft" target="_blank"
-            style="color:var(--accent);text-decoration:none">@25_craft</a></div>
+        <div class="trust-desc">Мій профіль в Instagram <a
+            href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer"
+            style="color:var(--accent);text-decoration:none"
+            onclick="gtag('event','click',{event_category:'social',event_label:'instagram_trust'})">@25_craft</a></div>
       </div>
     </div>
   </div>
 
+  </main>
+
   <!-- FOOTER -->
   <footer>
     <div>
-      <div class="footer-note">Всі приманки ручної роботи · Україна</div>
+      <div class="footer-note">Риболовні приманки ручної роботи · Україна</div>
       <div class="footer-note" style="margin-top:6px">© 2026 25craft · Всі права захищені</div>
     </div>
-    <a href="https://instagram.com/25_craft" target="_blank" class="footer-ig">@25_craft</a>
+    <div class="footer-socials">
+      <a href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Instagram" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_footer'})">
+        <img src="data:image/png;base64,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" alt="Instagram" width="28" height="28">
+      </a>
+      <a href="https://www.facebook.com/michael.polyah.5" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Facebook" onclick="gtag('event','click',{event_category:'social',event_label:'facebook_footer'})">
+        <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAwADADASIAAhEBAxEB/8QAHAABAAICAwEAAAAAAAAAAAAACAMHAAYCBAkF/8QAMRAAAgIABQIDBwIHAAAAAAAAAQIDBAAFBgcRMVEhgZEIEiRBUmGhN0ITInF0dbLB/8QAFQEBAQAAAAAAAAAAAAAAAAAABQb/xAAoEQABAgUCBQUBAAAAAAAAAAABBREAAgMEEjHBBkFhkaEUFSFR8BP/2gAMAwEAAhEDEQA/ABliStBPanSvWhkmmc8JHGpZmPYAdcZVgmtWYq1eNpJpXCRoOrMTwBhH7eaNpaWy1SUSXMpV+Isccnn6V7KPz1P2VSkqooVCAWlGp/c4EW1uklUgSHmOg3PSKlyvavVt2ISSQVaQPiBYm4PooJHnjM02r1bSiMkcFW6B4kV5uT6MAT5YRmXUrWY3oaNKB57M7hI40HixOLKrbH6rkrrJLeymCQjn+G0rkj7EhCPTnFFcoqXbSiWtUIJ6/PZokrTiJavJjNQpCYD6Hx3fePPSzBPVnevZhkhmQ8PHIpVlPYg9MR4S25Wiaeo6k0TLHFmlf3lhsAdSP2t3U/jrg22oJqtmWtYjaOaJykiN1VgeCMTiolz2E4BLynQxWoq1SVKZIGM8uo3HSN12PoR3deRSSKGFSB5wD38FHoW58sITB72Pvx0teRRyMFFuB4AT38GHqV488ITFdwvj6Mtq5fxELxpn7gMtMQ3c7xZPs5QRzbiGR1BaClLIhPyPKrz6Mcfe331lqLKtYR5ZlWZz0a8VVHIhPBdmJ5JP9OBjd9ttwci1HPBkmX1r0dqCmHdpYkVCF91TwQxPUj5Y5a63KyLS2aS5VcqXpbghEitFEjJ4g8cksD8u2CalzWqqec9u5AbEnzptDlG0t6KP/OndYymZ8gOf1rvBgdmd2dyWZjySfmcHrfChHS15NJGoUW4EnIHfxU+pXnzwhWJZixPJJ5Jwet8L8d3Xk0cbBhUgSAkd/Fj6FuPLCvFGPog+rhvMB8F5+4HHTEv3G8aVVnmq2YrNeRo5onDxuOqsDyDhH7eayo6py1AXSLMo1+Ir88Hn6l7qfx0P3NmJK089adLFaaSGZDykkbFWU9wR0xJpSrUT6hIDynUfucXS2iUlWkAS0w0Ox6R6D+zZ+oE/+Pk/3jx1/aK/UZ/7SL/uCltrv5r3QmZnMKLZZmUphMPGYV2Ye6SD+xkJP8o8SccNx9+Nea4zV8yutluWzPGsRFCuVHA7e+zkHx6g4VC3b+4G6Ytizc37wGeHLopQsnGWbu5Zuz+IsDcPWVHS2WuA6S5lIvw9fnk8/U3ZR+eg+xwtTy2bMtmxI0k0rl5HbqzE8k4yzPPZnexZmkmmc8vJIxZmPck9cR4KVVWooVASGlGg/c4cRESklUiAXmOp2HSP/9k=" alt="Facebook" width="28" height="28">
+      </a>
+      <a href="https://t.me/mpoliakh" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Telegram" onclick="gtag('event','click',{event_category:'social',event_label:'telegram_footer'})">
+        <img src="data:image/png;base64,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" alt="Telegram" width="28" height="28">
+      </a>
+    </div>
   </footer>
+
+  <!-- CUSTOM ORDER MODAL -->
+  <div class="custom-order-overlay" id="customOrderOverlay" onclick="handleCustomOrderOverlayClick(event)">
+    <div class="custom-order-modal">
+      <button class="custom-order-close" onclick="closeCustomOrder()">✕</button>
+
+      <div class="custom-order-form" id="customOrderForm">
+        <div class="custom-order-title">Індивідуальне замовлення</div>
+        <div class="custom-order-desc">
+          Залиште свої контакти — я зв'яжусь з вами і ми обговоримо деталі:<br>
+          колір, модель, терміни та ціну.
+        </div>
+
+        <label class="field-label">Ваше ім'я</label>
+        <input class="field-input" id="customNameInput" type="text" placeholder="Ваше імʼя">
+
+        <label class="field-label">Номер телефону *</label>
+        <input class="field-input" id="customPhoneInput" type="tel" placeholder="+380 XX XXX XX XX" maxlength="17"
+          oninput="formatPhone(this)">
+        <div class="field-error" id="customPhoneError">Введіть коректний номер телефону</div>
+
+        <div class="order-actions">
+          <button class="btn-submit" id="customSubmitBtn" onclick="submitCustomOrder()">
+            <span class="spinner" id="customSubmitSpinner"></span>
+            <span id="customSubmitText">Надіслати</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="custom-order-success" id="customOrderSuccess">
+        <div style="font-size:40px;margin-bottom:14px">✅</div>
+        <div class="success-title">Дякую!</div>
+        <div class="success-text">Отримав ваш запит. Зв'яжусь з вами найближчим часом.</div>
+        <button class="checkout-btn" onclick="closeCustomOrder()" style="max-width:200px;margin:16px auto 0;display:block">Закрити</button>
+      </div>
+    </div>
+  </div>
 
   <!-- CART DRAWER -->
   <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
@@ -1280,98 +1652,16 @@
   </div>
 
   <script>
-    const TELEGRAM_BOT_TOKEN = "8679783832:AAHnvfB7Hxvqw-ulFBYaORLzKsx9_sgOVxg";
+    const WORKER_URL = "https://25craft-bot.m-poliakh.workers.dev";
 
-    const TELEGRAM_CHAT_ID = "499821932";
+    const SHEETS_ID = "1uDmg_gaX-IesJF1G7T14EMD_BLXFO7ZSnFzH7-94yZg";
+    const SHEETS_KEY = "AIzaSyBu3ZG2H24ohfjWuGaAosyc6S0lxN4Rir8";
+    const SHEETS_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/Sheet1?key=${SHEETS_KEY}`;
 
     // ================================================================
-    // 🎣  КАТАЛОГ ПРИМАНОК
+    // КАТАЛОГ ПРИМАНОК — завантажується з Google Sheets
     // ================================================================
-    const lures = [
-      {
-        id: 1,
-        name: "Crank",
-        weight: "2.5g",
-        length: "25mm",
-        type: "Slow Sinking",
-        color: "Green",
-        price: 450,
-        qty: 3,
-        status: "available", // available | sold | reserved
-        notes: "Класична забарвлення під окуня.",
-        img: [
-          "Images/crank_1.webp",
-          "Images/crank_2.webp",
-          "Images/crank_3.webp",
-          "Images/crank_4.webp"
-        ]// вставте URL фото
-      },
-      {
-        id: 2,
-        name: "Воблер #02",
-        weight: "5g",
-        length: "55mm",
-        type: "Floating",
-        color: "Пескарь — коричнево-срібний",
-        price: 400,
-        qty: 2,
-        status: "available",
-        notes: "Легка приманка для мілководдя.",
-        img: ""
-      },
-      {
-        id: 3,
-        name: "Раттлін #03",
-        weight: "10g",
-        length: "70mm",
-        type: "Sinking",
-        color: "Ягода — зелена крапка",
-        price: 380,
-        qty: 0,
-        status: "sold",
-        notes: "Незвична забарвлення. Добре провокує хижака.",
-        img: ""
-      },
-      {
-        id: 4,
-        name: "Воблер #04",
-        weight: "6g",
-        length: "65mm",
-        type: "Suspending",
-        color: "Карась — золото-оранжевий",
-        price: 420,
-        qty: 1,
-        status: "available",
-        notes: "Суспендер — зависає в товщі води.",
-        img: ""
-      },
-      {
-        id: 5,
-        name: "Раттлін #05",
-        weight: "8g",
-        length: "62mm",
-        type: "Sinking",
-        color: "Форель — рожево-срібний",
-        price: 360,
-        qty: 1,
-        status: "reserved",
-        notes: "Яскрава забарвлення форелі.",
-        img: ""
-      },
-      {
-        id: 6,
-        name: "Воблер #06",
-        weight: "9g",
-        length: "75mm",
-        type: "Floating",
-        color: "New Design — жовто-зелений",
-        price: 450,
-        qty: 3,
-        status: "available",
-        notes: "Новий дизайн. Обмежена кількість.",
-        img: ""
-      }
-    ];
+    let lures = [];
     // ================================================================
 
     let cart = [];
@@ -1407,17 +1697,20 @@
         const imgs = Array.isArray(l.img) ? l.img.filter(Boolean) : (l.img ? [l.img] : []);
 
         let imgHtml = "";
+        const isFirst = items.indexOf(l) < 2; // перші 2 картки — eager + high priority
+        const loadAttr = isFirst ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
+
         if (imgs.length === 0) {
           imgHtml = `<div class="card-img-placeholder">🎣</div>`;
         } else if (imgs.length === 1) {
-          imgHtml = `<div class="card-slider" style="cursor:zoom-in" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${imgs[0]}" alt="${l.name}" loading="lazy"></div></div>`;
+          imgHtml = `<div class="card-slider" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${esc(imgs[0])}" alt="${esc(l.name)}" width="800" height="600" ${loadAttr}></div></div>`;
         } else {
-          const slides = imgs.map(src => `<img class="slider-slide" src="${src}" alt="${l.name}" loading="lazy">`).join("");
+          const slides = imgs.map((src, i) => `<img class="slider-slide" src="${esc(src)}" alt="${esc(l.name)}" width="800" height="600" ${i === 0 ? loadAttr : 'loading="lazy"'}>`).join("");
           const dots = imgs.map((_, i) => `<span class="slider-dot ${i === 0 ? 'active' : ''}" onclick="slideTo(${l.id},${i},event)"></span>`).join("");
           imgHtml = `
         <div class="card-slider" id="slider_${l.id}">
           <div class="slider-track" id="track_${l.id}">${slides}</div>
-          <div style="position:absolute;inset:0;z-index:1;cursor:zoom-in" onclick="openLightboxById(${l.id}, sliderState[${l.id}]||0)"></div>
+          <div style="position:absolute;inset:0;z-index:1;" onclick="openLightboxById(${l.id}, sliderState[${l.id}]||0)"></div>
           <button class="slider-btn prev" style="z-index:3" onclick="slideDir(${l.id},-1,event)">‹</button>
           <button class="slider-btn next" style="z-index:3" onclick="slideDir(${l.id},1,event)">›</button>
           <div class="slider-dots" style="z-index:3" id="dots_${l.id}">${dots}</div>
@@ -1427,29 +1720,35 @@
         card.innerHTML = `
       <div class="card-img-wrap">
         ${imgHtml}
-        <span class="status-pill ${l.status}">${statusLabel[l.status]}</span>
+        <span class="status-pill ${esc(l.status)}">${statusLabel[l.status] || ''}</span>
       </div>
       <div class="card-body">
         <div class="card-row1">
-          <div class="card-name">${l.name}</div>
-          <div class="card-price">${l.price} грн</div>
+          <div class="card-name-wrap">
+            <div class="card-name">${esc(l.name)}</div>
+          </div>
+          <div class="card-price-wrap">
+            ${l.oldPrice ? `<div class="card-old-price">${esc(String(l.oldPrice))} грн</div>` : ''}
+            <div class="card-price">${esc(String(l.price))} грн</div>
+          </div>
         </div>
         <div class="card-tags">
-          <span class="tag">${l.weight}</span>
-          <span class="tag">${l.length}</span>
-          <span class="tag ${typeTagClass[l.type] || ''}">${l.type}</span>
+          <span class="tag">${esc(l.weight)}</span>
+          <span class="tag">${esc(l.length)}</span>
+          <span class="tag ${typeTagClass[l.type] || ''}">${esc(l.type)}</span>
         </div>
-        <div class="card-color">${l.color}</div>
-        ${l.status === 'available' ? `<div class="qty-badge">В наявності: ${l.qty} шт</div>` : ''}
+        ${l.notes ? `<div class="card-notes">${esc(l.notes)}</div>` : ''}
+        ${l.status === 'available' ? `<div class="qty-badge">В наявності: ${esc(String(l.qty))} шт</div>` : ''}
         <button
           class="card-add-btn ${inCart ? 'in-cart' : ''}"
-          onclick="toggleCart(${l.id})"
+          onclick="toggleCart(${Number(l.id)})"
           ${sold ? 'disabled' : ''}
-          id="addBtn_${l.id}"
+          id="addBtn_${Number(l.id)}"
         >${sold ? 'Недоступно' : inCart ? '✓ В кошику' : 'Додати до кошика'}</button>
       </div>
     `;
         grid.appendChild(card);
+        if (imgs.length > 1) initCardSwipe(l.id);
       });
     }
 
@@ -1460,8 +1759,18 @@
 
       if (idx === -1) {
         cart.push(lure);
+        gtag('event', 'add_to_cart', {
+          currency: 'UAH',
+          value: lure.price,
+          items: [{ item_id: lure.id, item_name: lure.name, price: lure.price }]
+        });
       } else {
         cart.splice(idx, 1);
+        gtag('event', 'remove_from_cart', {
+          currency: 'UAH',
+          value: lure.price,
+          items: [{ item_id: lure.id, item_name: lure.name, price: lure.price }]
+        });
       }
 
       updateCartUI();
@@ -1500,15 +1809,15 @@
         return `
     <div class="drawer-item">
       ${firstImg
-            ? `<img class="drawer-item-img" src="${firstImg}" alt="${l.name}">`
+            ? `<img class="drawer-item-img" src="${esc(firstImg)}" alt="${esc(l.name)}">`
             : `<div class="drawer-item-img">🎣</div>`
           }
       <div class="drawer-item-info">
-        <div class="drawer-item-name">${l.name}</div>
-        <div class="drawer-item-specs">${l.weight} · ${l.length} · ${l.type}</div>
+        <div class="drawer-item-name">${esc(l.name)}</div>
+        <div class="drawer-item-specs">${esc(l.weight)} · ${esc(l.length)} · ${esc(l.type)}</div>
       </div>
-      <div class="drawer-item-price">${l.price} грн</div>
-      <button class="drawer-item-remove" onclick="removeFromCart(${l.id})" title="Видалити">✕</button>
+      <div class="drawer-item-price">${esc(String(l.price))} грн</div>
+      <button class="drawer-item-remove" onclick="removeFromCart(${Number(l.id)})" title="Видалити">✕</button>
     </div>
   `}).join("");
     }
@@ -1531,14 +1840,20 @@
       if (!cart.length) return;
       closeDrawer();
 
+      gtag('event', 'begin_checkout', {
+        currency: 'UAH',
+        value: calcTotal(),
+        items: cart.map(l => ({ item_id: l.id, item_name: l.name, price: l.price }))
+      });
+
       // Fill summary
       const summary = document.getElementById("orderSummary");
       summary.innerHTML = `
     <div class="order-summary-title">Ваше замовлення</div>
     ${cart.map(l => `
       <div class="order-summary-item">
-        <span>${l.name} (${l.weight}, ${l.type})</span>
-        <span>${l.price} грн</span>
+        <span>${esc(l.name)} (${esc(l.weight)}, ${esc(l.type)})</span>
+        <span>${esc(String(l.price))} грн</span>
       </div>
     `).join("")}
     <div class="order-summary-item" style="margin-top:8px;padding-top:8px;border-top:1px solid #252525;font-weight:400;color:#eeebe4">
@@ -1613,7 +1928,7 @@
 
       // Build message
       const orderLines = cart.map((l, i) =>
-        `  ${i + 1}. ${l.name} — ${l.weight}, ${l.length}, ${l.type}\n     Колір: ${l.color}\n     Ціна: ${l.price} грн`
+        `  ${i + 1}. [ID: ${l.id}] ${l.name} — ${l.weight}, ${l.length}, ${l.type}${l.color ? `\n     Колір: ${l.color}` : ""}\n     Ціна: ${l.price} грн`
       ).join("\n");
 
       const message =
@@ -1629,14 +1944,10 @@ ${orderLines}
 ⏰ ${new Date().toLocaleString("uk-UA")}`;
 
       try {
-        const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        const res = await fetch(WORKER_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-            parse_mode: "Markdown"
-          })
+          body: JSON.stringify({ message })
         });
 
         const data = await res.json();
@@ -1648,7 +1959,7 @@ ${orderLines}
           throw new Error(data.description || "Telegram error");
         }
       } catch (err) {
-        alert("Помилка відправки. Перевірте токен бота і Chat ID у налаштуваннях файлу.\n\nДеталі: " + err.message);
+        alert("Помилка відправки. Спробуйте ще раз або напишіть нам в Instagram.\n\nДеталі: " + err.message);
         btn.disabled = false;
         spinner.classList.remove("visible");
         btnText.textContent = "Надіслати замовлення";
@@ -1663,8 +1974,7 @@ ${orderLines}
       const lure = lures.find(l => l.id === id);
       const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
       if (!imgs.length) return;
-      sliderState[id] = sliderState[id] || 0;
-      sliderState[id] = (sliderState[id] + dir + imgs.length) % imgs.length;
+      sliderState[id] = ((sliderState[id] || 0) + dir + imgs.length) % imgs.length;
       applySlide(id, imgs.length);
     }
 
@@ -1682,10 +1992,52 @@ ${orderLines}
       const idx = sliderState[id] || 0;
       if (track) track.style.transform = `translateX(-${idx * 100}%)`;
       if (dotsEl) {
-        dotsEl.querySelectorAll(".slider-dot").forEach((d, i) => {
-          d.classList.toggle("active", i === idx);
-        });
+        dotsEl.querySelectorAll('.slider-dot').forEach((d, i) =>
+          d.classList.toggle('active', i === idx)
+        );
       }
+    }
+
+    // ── TOUCH SWIPE — только мобильный, только свайп ──
+    function initCardSwipe(id) {
+      const slider = document.getElementById(`slider_${id}`);
+      if (!slider) return;
+
+      const lure = lures.find(l => l.id === id);
+      const imgs = Array.isArray(lure.img) ? lure.img.filter(Boolean) : [];
+      const total = imgs.length;
+      if (total < 2) return;
+
+      let startX = 0, startY = 0, dirLocked = false, isHoriz = false;
+
+      slider.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        dirLocked = false;
+        isHoriz = false;
+      }, { passive: true });
+
+      slider.addEventListener('touchmove', e => {
+        if (dirLocked && !isHoriz) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (!dirLocked && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+          dirLocked = true;
+          isHoriz = Math.abs(dx) > Math.abs(dy);
+        }
+        if (isHoriz) e.preventDefault();
+      }, { passive: false });
+
+      slider.addEventListener('touchend', e => {
+        if (!isHoriz) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) < 40) return;
+        const cur = sliderState[id] || 0;
+        sliderState[id] = dx < 0
+          ? (cur + 1) % total
+          : (cur - 1 + total) % total;
+        applySlide(id, total);
+      }, { passive: true });
     }
 
     // ── FILTERS ──
@@ -1702,6 +2054,7 @@ ${orderLines}
     document.addEventListener("keydown", e => {
       if (e.key === "Escape") {
         if (document.getElementById("lightbox").classList.contains("open")) closeLightbox();
+        else if (document.getElementById("customOrderOverlay").classList.contains("open")) closeCustomOrder();
         else if (document.getElementById("orderOverlay").classList.contains("open")) closeOrder();
         else closeDrawer();
       }
@@ -1709,6 +2062,74 @@ ${orderLines}
       if (e.key === "ArrowRight" && document.getElementById("lightbox").classList.contains("open")) lightboxDir(1);
       if (e.key === "Enter" && document.getElementById("orderOverlay").classList.contains("open")) submitOrder();
     });
+
+    // ── CUSTOM ORDER ──
+    function openCustomOrder() {
+      document.getElementById("customOrderOverlay").classList.add("open");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => document.getElementById("customNameInput").focus(), 100);
+    }
+
+    function closeCustomOrder() {
+      document.getElementById("customOrderOverlay").classList.remove("open");
+      document.body.style.overflow = "";
+      document.getElementById("customOrderForm").classList.remove("hidden");
+      document.getElementById("customOrderSuccess").classList.remove("visible");
+      document.getElementById("customNameInput").value = "";
+      document.getElementById("customPhoneInput").value = "";
+      document.getElementById("customPhoneError").classList.remove("visible");
+      document.getElementById("customPhoneInput").classList.remove("error");
+      document.getElementById("customSubmitBtn").disabled = false;
+      document.getElementById("customSubmitSpinner").classList.remove("visible");
+      document.getElementById("customSubmitText").textContent = "Надіслати";
+    }
+
+    function handleCustomOrderOverlayClick(e) {
+      if (e.target === document.getElementById("customOrderOverlay")) closeCustomOrder();
+    }
+
+    async function submitCustomOrder() {
+      const name = document.getElementById("customNameInput").value.trim();
+      const phone = document.getElementById("customPhoneInput").value.trim();
+      const phoneError = document.getElementById("customPhoneError");
+      const phoneInput = document.getElementById("customPhoneInput");
+
+      if (!validatePhone(phone)) {
+        phoneInput.classList.add("error");
+        phoneError.classList.add("visible");
+        phoneInput.focus();
+        return;
+      }
+      phoneInput.classList.remove("error");
+      phoneError.classList.remove("visible");
+
+      const btn = document.getElementById("customSubmitBtn");
+      btn.disabled = true;
+      document.getElementById("customSubmitSpinner").classList.add("visible");
+      document.getElementById("customSubmitText").textContent = "Надсилаємо...";
+
+      const message = `✏️ *Індивідуальне замовлення — 25craft*\n\n👤 *Ім'я:* ${name || "не вказано"}\n📞 *Телефон:* ${phone}\n\n⏰ ${new Date().toLocaleString("uk-UA")}`;
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          document.getElementById("customOrderForm").classList.add("hidden");
+          document.getElementById("customOrderSuccess").classList.add("visible");
+        } else {
+          throw new Error(data.description || "Telegram error");
+        }
+      } catch (err) {
+        alert("Помилка відправки. Деталі: " + err.message);
+        btn.disabled = false;
+        document.getElementById("customSubmitSpinner").classList.remove("visible");
+        document.getElementById("customSubmitText").textContent = "Надіслати";
+      }
+    }
 
     // ── LIGHTBOX ──
     let lbImgs = [];
@@ -1775,9 +2196,95 @@ ${orderLines}
       };
     }
 
+    // ── SECURITY: екранування HTML для даних з Google Sheets ──
+    function esc(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
     // ── INIT ──
-    document.getElementById("stockCount").textContent = lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
-    renderGrid("all");
+    const CACHE_KEY = "25craft_lures";
+    const CACHE_TTL = 5 * 60 * 1000; // 5 хвилин
+
+    async function loadFromSheets() {
+      const grid = document.getElementById("grid");
+
+      // Показуємо кешовані дані миттєво
+      try {
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const { data, ts } = JSON.parse(cached);
+          if (Date.now() - ts < CACHE_TTL) {
+            lures = data;
+            document.getElementById("stockCount").textContent =
+              lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
+            renderGrid("all");
+            // Оновлюємо у фоні
+            fetchFromSheets(false);
+            return;
+          }
+        }
+      } catch {}
+
+      // Перший завантаження — показуємо індикатор
+      grid.innerHTML = '<div class="grid-empty">Завантаження...</div>';
+      await fetchFromSheets(true);
+    }
+
+    async function fetchFromSheets(updateUI) {
+      try {
+        const res = await fetch(SHEETS_URL);
+        const data = await res.json();
+        const rows = data.values || [];
+        const headers = rows[0];
+
+        const freshLures = rows.slice(1).map(row => {
+          const obj = {};
+          headers.forEach((h, i) => obj[h] = row[i] || "");
+          return {
+            id: Number(obj.id),
+            name: obj.name,
+            weight: obj.weight,
+            length: obj.length,
+            type: obj.type,
+            color: obj.color,
+            price: Number(obj.price),
+            oldPrice: obj.oldPrice ? Number(obj.oldPrice) : null,
+            qty: Number(obj.qty) || 0,
+            status: obj.status || "available",
+            notes: obj.notes,
+            img: obj.img ? obj.img.split(",").map(s => s.trim()).filter(Boolean) : []
+          };
+        });
+
+        // Зберігаємо в кеш
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: freshLures, ts: Date.now() }));
+        } catch {}
+
+        lures = freshLures;
+
+        if (updateUI) {
+          document.getElementById("stockCount").textContent =
+            lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
+          renderGrid("all");
+        }
+
+      } catch (err) {
+        if (updateUI) {
+          document.getElementById("grid").innerHTML =
+            '<div class="grid-empty">Помилка завантаження каталогу. Спробуйте оновити сторінку.</div>';
+        }
+        console.error("Sheets error:", err);
+      }
+    }
+
+    loadFromSheets();
   </script>
 </body>
 
