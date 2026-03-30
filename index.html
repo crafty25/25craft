@@ -1952,7 +1952,7 @@ ${orderLines}
         const res = await fetch(WORKER_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message })
+          body: JSON.stringify({ message, itemIds: cart.map(l => String(l.id)) })
         });
 
         const data = await res.json();
