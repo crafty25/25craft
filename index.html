@@ -22,21 +22,17 @@
   <meta property="og:locale" content="uk_UA">
   <meta property="og:site_name" content="25craft">
 
-  <!-- Twitter / X Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="25craft — Handmade Lures">
-  <meta name="twitter:description" content="Рибальські приманки ручної роботи. Унікальне розфарбування, перевірено на рибалці.">
-  <meta name="twitter:image" content="https://25craft.com.ua/Images/og-image.webp">
-
   <!-- Theme color для мобільних браузерів -->
   <meta name="theme-color" content="#0c0c0c">
 
   <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230c0c0c'/><text x='90' y='130' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='100' fill='%23c8f542' letter-spacing='-4'>25</text></svg>">
+  <link rel="apple-touch-icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%230c0c0c'/><text x='90' y='130' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='100' fill='%23c8f542' letter-spacing='-4'>25</text></svg>">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230c0c0c'/><text x='16' y='24' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='20' fill='%23c8f542' letter-spacing='-1'>25</text></svg>">
-  <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230c0c0c'/><text x='16' y='24' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='20' fill='%23c8f542' letter-spacing='-1'>25</text></svg>">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
 
   <!-- JSON-LD: Structured Data -->
   <script type="application/ld+json">
@@ -70,11 +66,9 @@
   <link rel="preconnect" href="https://sheets.googleapis.com">
   <link rel="preconnect" href="https://25craft-bot.m-poliakh.workers.dev" crossorigin>
   <!-- Асинхронне завантаження шрифтів — не блокує рендеринг -->
-  <link
-    rel="preload"
+  <link rel="preload"
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'">
+    as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
     <link
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
@@ -237,6 +231,7 @@
       .custom-order-btn {
         display: none;
       }
+
       .hero-custom-order-btn {
         display: block;
         margin-top: 20px;
@@ -253,11 +248,13 @@
         transition: background 0.2s;
         text-align: center;
       }
+
       header {
         position: sticky;
         top: 0;
         z-index: 100;
       }
+
       /* Hero: stack vertically on mobile */
       .hero {
         flex-direction: column !important;
@@ -265,10 +262,12 @@
         gap: 0 !important;
         padding: 32px 20px 28px !important;
       }
+
       .hero-right {
         text-align: left !important;
         margin-top: 20px;
       }
+
       .hero-stat {
         font-size: 40px;
       }
@@ -278,7 +277,7 @@
     .custom-order-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0, 0, 0, 0.75);
       z-index: 400;
       display: flex;
       align-items: center;
@@ -323,7 +322,9 @@
       transition: color 0.15s;
     }
 
-    .custom-order-close:hover { color: var(--text); }
+    .custom-order-close:hover {
+      color: var(--text);
+    }
 
     .custom-order-title {
       font-family: 'Bebas Neue', sans-serif;
@@ -339,9 +340,19 @@
       margin-bottom: 24px;
     }
 
-    .custom-order-success { display: none; text-align: center; padding: 16px 0; }
-    .custom-order-success.visible { display: block; }
-    .custom-order-form.hidden { display: none; }
+    .custom-order-success {
+      display: none;
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    .custom-order-success.visible {
+      display: block;
+    }
+
+    .custom-order-form.hidden {
+      display: none;
+    }
 
     /* ── HERO ── */
     .hero {
@@ -934,6 +945,7 @@
         align-items: center;
         padding: 16px;
       }
+
       .order-modal {
         padding: 24px 20px;
         max-height: 80vh;
@@ -1173,7 +1185,7 @@
       line-height: 1.8;
     }
 
-    .about-text p + p {
+    .about-text p+p {
       margin-top: 20px;
     }
 
@@ -1322,6 +1334,7 @@
         padding: 24px 20px;
       }
     }
+
     /* ── LIGHTBOX ── */
     .lightbox {
       position: fixed !important;
@@ -1330,7 +1343,7 @@
       left: 0 !important;
       width: 100vw !important;
       height: 100vh !important;
-      background: rgba(0,0,0,0.96);
+      background: rgba(0, 0, 0, 0.96);
       z-index: 9999 !important;
       display: none;
       align-items: center;
@@ -1340,7 +1353,9 @@
       max-width: none !important;
     }
 
-    .lightbox.open { display: flex !important; }
+    .lightbox.open {
+      display: flex !important;
+    }
 
     .lightbox-img-wrap {
       position: relative;
@@ -1364,38 +1379,55 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
-      width: 44px; height: 44px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       font-size: 20px;
       transition: background 0.15s;
       z-index: 2;
     }
 
-    .lightbox-btn:hover { background: rgba(255,255,255,0.18); }
-    .lightbox-btn.prev { left: 16px; }
-    .lightbox-btn.next { right: 16px; }
+    .lightbox-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .lightbox-btn.prev {
+      left: 16px;
+    }
+
+    .lightbox-btn.next {
+      right: 16px;
+    }
 
     .lightbox-close {
       position: absolute;
-      top: 16px; right: 16px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
-      width: 40px; height: 40px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       font-size: 18px;
       transition: background 0.15s;
       z-index: 10;
     }
 
-    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
 
     .lightbox-footer {
       padding: 16px 0 24px;
@@ -1408,22 +1440,27 @@
     .lightbox-counter {
       font-size: 12px;
       letter-spacing: 2px;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255, 255, 255, 0.4);
       text-transform: uppercase;
     }
 
-    .lightbox-dots { display: flex; gap: 6px; }
+    .lightbox-dots {
+      display: flex;
+      gap: 6px;
+    }
 
     .lightbox-dot {
-      width: 6px; height: 6px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 255, 255, 0.25);
       cursor: pointer;
       transition: background 0.15s;
     }
 
-    .lightbox-dot.active { background: #fff; }
-
+    .lightbox-dot.active {
+      background: #fff;
+    }
   </style>
 
 </head>
@@ -1450,76 +1487,82 @@
 
   <!-- HERO -->
   <main>
-  <div class="hero">
-    <div>
-      <h1 class="hero-title">HAND<br><em>MADE</em><br>LURES</h1>
-      <div class="hero-desc">Кожна приманка зроблена та налаштована вручну.<br>Авторський дизайн та колір</div>
-      <button class="hero-custom-order-btn" onclick="openCustomOrder()">Індивідуальне замовлення</button>
+    <div class="hero">
+      <div>
+        <h1 class="hero-title">HAND<br><em>MADE</em><br>LURES</h1>
+        <div class="hero-desc">Кожна приманка зроблена та налаштована вручну.<br>Авторський дизайн та колір</div>
+        <button class="hero-custom-order-btn" onclick="openCustomOrder()">Індивідуальне замовлення</button>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stat" id="stockCount">0</div>
+        <div class="hero-stat-label">В наявності</div>
+      </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-stat" id="stockCount">0</div>
-      <div class="hero-stat-label">В наявності</div>
-    </div>
-  </div>
 
-  <!-- FILTERS -->
-  <nav class="filters" aria-label="Фільтр каталогу">
-    <button class="filter-btn active" data-filter="all">Всі</button>
-    <!-- <button class="filter-btn" data-filter="Sinking">Sinking</button>
+    <!-- FILTERS -->
+    <nav class="filters" aria-label="Фільтр каталогу">
+      <button class="filter-btn active" data-filter="all">Всі</button>
+      <!-- <button class="filter-btn" data-filter="Sinking">Sinking</button>
   <button class="filter-btn" data-filter="Floating">Floating</button>
   <button class="filter-btn" data-filter="Suspending">Suspending</button> -->
-    <button class="filter-btn" data-filter="available">Тільки в наявності</button>
-  </nav>
+      <button class="filter-btn" data-filter="available">Тільки в наявності</button>
+    </nav>
 
-  <!-- GRID -->
-  <div class="grid-wrap">
-    <div class="grid" id="grid"></div>
-  </div>
-
-  <!-- ABOUT SECTION -->
-  <div class="about-section">
-    <div class="about-text">
-      <p>Кожну приманку я роблю самостійно — від заготовки до останнього шару лаку. Це не масове виробництво. Кожен воблер проходить через багато етапів шліфування, ґрунтування, фарбування та покриття лаком. На це йдуть дні, а іноді й тижні. Саме тому кожна приманка виходить унікальною — зі своїм характером і поведінкою.</p>
-      <p>За роки захоплення рибалки з усієї України та не тільки довіряли моїм приманкам, а більшість із них стали постійними клієнтами. Живі фото та відгуки — в моєму Instagram <a href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_about'})">@25_craft</a>. Також я завжди радий обговорити створення нового унікального воблера спеціально під ваш стиль ловлі та умови.</p>
+    <!-- GRID -->
+    <div class="grid-wrap">
+      <div class="grid" id="grid"></div>
     </div>
-  </div>
 
-  <!-- TRUST BLOCK -->
-  <div class="trust">
-    <div class="trust-item">
-      <div class="trust-icon">🎣</div>
-      <div>
-        <div class="trust-label">25craft — handmade lures</div>
-        <div class="trust-desc">
-          Багаторічний досвід у створенні приманок.
+    <!-- ABOUT SECTION -->
+    <div class="about-section">
+      <div class="about-text">
+        <p>Кожну приманку я роблю самостійно — від заготовки до останнього шару лаку. Це не масове виробництво. Кожен
+          воблер проходить через багато етапів шліфування, ґрунтування, фарбування та покриття лаком. На це йдуть дні, а
+          іноді й тижні. Саме тому кожна приманка виходить унікальною — зі своїм характером і поведінкою.</p>
+        <p>За роки захоплення рибалки з усієї України та не тільки довіряли моїм приманкам, а більшість із них стали
+          постійними клієнтами. Живі фото та відгуки — в моєму Instagram <a href="https://instagram.com/25_craft"
+            target="_blank" rel="noopener noreferrer"
+            onclick="gtag('event','click',{event_category:'social',event_label:'instagram_about'})">@25_craft</a>. Також
+          я завжди радий обговорити створення нового унікального воблера спеціально під ваш стиль ловлі та умови.</p>
+      </div>
+    </div>
+
+    <!-- TRUST BLOCK -->
+    <div class="trust">
+      <div class="trust-item">
+        <div class="trust-icon">🎣</div>
+        <div>
+          <div class="trust-label">25craft — handmade lures</div>
+          <div class="trust-desc">
+            Багаторічний досвід у створенні приманок.
+          </div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div>
+          <div class="trust-label">Оплата після підтвердження</div>
+          <div class="trust-desc">Оплата на карту (Monobank/OTP)</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">📦</div>
+        <div>
+          <div class="trust-label">Доставка</div>
+          <div class="trust-desc">Умови доставки узгоджуємо після оформлення замовлення.</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">📸</div>
+        <div>
+          <div class="trust-label">Живі фото та відгуки</div>
+          <div class="trust-desc">Мій профіль в Instagram <a href="https://instagram.com/25_craft" target="_blank"
+              rel="noopener noreferrer" style="color:var(--accent);text-decoration:none"
+              onclick="gtag('event','click',{event_category:'social',event_label:'instagram_trust'})">@25_craft</a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="trust-item">
-      <div class="trust-icon">💳</div>
-      <div>
-        <div class="trust-label">Оплата після підтвердження</div>
-        <div class="trust-desc">Оплата на карту (Monobank/OTP)</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon">📦</div>
-      <div>
-        <div class="trust-label">Доставка</div>
-        <div class="trust-desc">Умови доставки узгоджуємо після оформлення замовлення.</div>
-      </div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon">📸</div>
-      <div>
-        <div class="trust-label">Живі фото та відгуки</div>
-        <div class="trust-desc">Мій профіль в Instagram <a
-            href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer"
-            style="color:var(--accent);text-decoration:none"
-            onclick="gtag('event','click',{event_category:'social',event_label:'instagram_trust'})">@25_craft</a></div>
-      </div>
-    </div>
-  </div>
 
   </main>
 
@@ -1530,14 +1573,24 @@
       <div class="footer-note" style="margin-top:6px">© 2026 25craft · Всі права захищені</div>
     </div>
     <div class="footer-socials">
-      <a href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Instagram" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_footer'})">
-        <img src="data:image/png;base64,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" alt="Instagram" width="28" height="28">
+      <a href="https://instagram.com/25_craft" target="_blank" rel="noopener noreferrer" class="footer-social-link"
+        title="Instagram" onclick="gtag('event','click',{event_category:'social',event_label:'instagram_footer'})">
+        <img
+          src="data:image/png;base64,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"
+          alt="Instagram" width="28" height="28">
       </a>
-      <a href="https://www.facebook.com/michael.polyah.5" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Facebook" onclick="gtag('event','click',{event_category:'social',event_label:'facebook_footer'})">
-        <img src="data:image/png;base64,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" alt="Facebook" width="28" height="28">
+      <a href="https://www.facebook.com/michael.polyah.5" target="_blank" rel="noopener noreferrer"
+        class="footer-social-link" title="Facebook"
+        onclick="gtag('event','click',{event_category:'social',event_label:'facebook_footer'})">
+        <img
+          src="data:image/png;base64,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"
+          alt="Facebook" width="28" height="28">
       </a>
-      <a href="https://t.me/mpoliakh" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Telegram" onclick="gtag('event','click',{event_category:'social',event_label:'telegram_footer'})">
-        <img src="data:image/png;base64,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" alt="Telegram" width="28" height="28">
+      <a href="https://t.me/mpoliakh" target="_blank" rel="noopener noreferrer" class="footer-social-link"
+        title="Telegram" onclick="gtag('event','click',{event_category:'social',event_label:'telegram_footer'})">
+        <img
+          src="data:image/png;base64,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"
+          alt="Telegram" width="28" height="28">
       </a>
     </div>
   </footer>
@@ -1574,7 +1627,8 @@
         <div style="font-size:40px;margin-bottom:14px">✅</div>
         <div class="success-title">Дякую!</div>
         <div class="success-text">Отримав ваш запит. Зв'яжусь з вами найближчим часом.</div>
-        <button class="checkout-btn" onclick="closeCustomOrder()" style="max-width:200px;margin:16px auto 0;display:block">Закрити</button>
+        <button class="checkout-btn" onclick="closeCustomOrder()"
+          style="max-width:200px;margin:16px auto 0;display:block">Закрити</button>
       </div>
     </div>
   </div>
@@ -1686,7 +1740,7 @@
         const imgs = Array.isArray(l.img) ? l.img.filter(Boolean) : (l.img ? [l.img] : []);
 
         let imgHtml = "";
-        const isFirst = items.indexOf(l) < 2; 
+        const isFirst = items.indexOf(l) < 2;
         const loadAttr = isFirst ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
 
         if (imgs.length === 0) {
@@ -1862,14 +1916,14 @@
     function closeAll() {
       document.getElementById("orderOverlay").classList.remove("open");
       document.body.style.overflow = "";
-      
+
       document.getElementById("orderFormContent").classList.remove("hidden");
       document.getElementById("orderSuccess").classList.remove("visible");
       document.getElementById("phoneInput").value = "";
       document.getElementById("commentInput").value = "";
       document.getElementById("phoneError").classList.remove("visible");
       document.getElementById("phoneInput").classList.remove("error");
-      
+
       cart = [];
       updateCartUI();
       renderGrid(currentFilter);
@@ -2157,8 +2211,8 @@ ${actionLines}`;
       const dotsEl = document.getElementById("lightboxDots");
       dotsEl.innerHTML = lbImgs.length > 1
         ? lbImgs.map((_, i) =>
-            `<span class="lightbox-dot ${i === lbIdx ? 'active' : ''}" onclick="lightboxDotClick(${i})"></span>`
-          ).join("") : "";
+          `<span class="lightbox-dot ${i === lbIdx ? 'active' : ''}" onclick="lightboxDotClick(${i})"></span>`
+        ).join("") : "";
       document.getElementById("lbPrev").style.display = lbImgs.length > 1 ? "flex" : "none";
       document.getElementById("lbNext").style.display = lbImgs.length > 1 ? "flex" : "none";
     }
@@ -2191,7 +2245,7 @@ ${actionLines}`;
     }
 
     const CACHE_KEY = "25craft_lures";
-    const CACHE_TTL = 5 * 60 * 1000; 
+    const CACHE_TTL = 5 * 60 * 1000;
 
     async function loadFromSheets() {
       const grid = document.getElementById("grid");
@@ -2205,12 +2259,12 @@ ${actionLines}`;
             document.getElementById("stockCount").textContent =
               lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
             renderGrid("all");
-            
+
             fetchFromSheets(false);
             return;
           }
         }
-      } catch {}
+      } catch { }
 
       grid.innerHTML = '<div class="grid-empty">Завантаження...</div>';
       await fetchFromSheets(true);
@@ -2244,7 +2298,7 @@ ${actionLines}`;
 
         try {
           sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: freshLures, ts: Date.now() }));
-        } catch {}
+        } catch { }
 
         lures = freshLures;
 
@@ -2269,14 +2323,15 @@ ${actionLines}`;
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VFVKSM7FHL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-VFVKSM7FHL');
   </script>
 
   <!-- Facebook Pixel Code -->
-  <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','975518988475902');fbq('track','PageView');</script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=975518988475902&ev=PageView&noscript=1"/></noscript>
+  <script>!function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '975518988475902'); fbq('track', 'PageView');</script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=975518988475902&ev=PageView&noscript=1" /></noscript>
   <!-- End Facebook Pixel Code -->
 
 </body>
