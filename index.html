@@ -1936,6 +1936,10 @@
         `  ${i + 1}. [ID: ${l.id}] ${l.name} — ${l.weight}, ${l.length}, ${l.type}${l.color ? `\n     Колір: ${l.color}` : ""}\n     Ціна: ${l.price} грн`
       ).join("\n");
 
+      const actionLines = cart.map(l =>
+        `/confirm ${l.id} — підтвердити\n/decline ${l.id} — скасувати`
+      ).join("\n");
+
       const message =
         `🎣 *Нове замовлення — 25craft*
 
@@ -1946,7 +1950,10 @@ ${orderLines}
 
 📞 *Телефон:* ${phone}${comment ? `\n\n💬 *Коментар:* ${comment}` : ""}
 
-⏰ ${new Date().toLocaleString("uk-UA")}`;
+⏰ ${new Date().toLocaleString("uk-UA")}
+
+⚙️ *Дії:*
+${actionLines}`;
 
       try {
         const res = await fetch(WORKER_URL, {
