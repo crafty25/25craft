@@ -72,9 +72,11 @@
     gtag('config', 'G-VFVKSM7FHL');
   </script>
 
-  <!-- Preconnect для швидшого з'єднання з Google Fonts -->
+  <!-- Preconnect для швидшого з'єднання з API -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://sheets.googleapis.com">
+  <link rel="preconnect" href="https://25craft-bot.m-poliakh.workers.dev" crossorigin>
   <!-- Асинхронне завантаження шрифтів — не блокує рендеринг -->
   <link
     rel="preload"
@@ -1663,11 +1665,7 @@
     const SHEETS_KEY = "AIzaSyBu3ZG2H24ohfjWuGaAosyc6S0lxN4Rir8";
     const SHEETS_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/Sheet1?key=${SHEETS_KEY}`;
 
-    // ================================================================
-    // КАТАЛОГ ПРИМАНОК — завантажується з Google Sheets
-    // ================================================================
     let lures = [];
-    // ================================================================
 
     let cart = [];
     let currentFilter = "all";
@@ -1675,7 +1673,6 @@
     const statusLabel = { available: "В наявності", sold: "Продано", reserved: "Відкладено" };
     const typeTagClass = { Sinking: "sinking", Floating: "floating", Suspending: "suspending" };
 
-    // ── RENDER ──
     function renderGrid(filter) {
       const grid = document.getElementById("grid");
       grid.innerHTML = "";
@@ -1698,11 +1695,10 @@
         const card = document.createElement("div");
         card.className = "card" + (sold ? " sold" : "");
 
-        // Normalize img to array
         const imgs = Array.isArray(l.img) ? l.img.filter(Boolean) : (l.img ? [l.img] : []);
 
         let imgHtml = "";
-        const isFirst = items.indexOf(l) < 2; // перші 2 картки — eager + high priority
+        const isFirst = items.indexOf(l) < 2; 
         const loadAttr = isFirst ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
 
         if (imgs.length === 0) {
@@ -1757,7 +1753,6 @@
       });
     }
 
-    // ── CART ──
     function toggleCart(id) {
       const lure = lures.find(l => l.id === id);
       const idx = cart.findIndex(c => c.id === id);
@@ -1840,7 +1835,6 @@
       document.body.style.overflow = "";
     }
 
-    // ── ORDER ──
     function openOrder() {
       if (!cart.length) return;
       closeDrawer();
@@ -1851,7 +1845,6 @@
         items: cart.map(l => ({ item_id: l.id, item_name: l.name, price: l.price }))
       });
 
-      // Fill summary
       const summary = document.getElementById("orderSummary");
       summary.innerHTML = `
     <div class="order-summary-title">Ваше замовлення</div>
@@ -1881,14 +1874,14 @@
     function closeAll() {
       document.getElementById("orderOverlay").classList.remove("open");
       document.body.style.overflow = "";
-      // Reset form
+      
       document.getElementById("orderFormContent").classList.remove("hidden");
       document.getElementById("orderSuccess").classList.remove("visible");
       document.getElementById("phoneInput").value = "";
       document.getElementById("commentInput").value = "";
       document.getElementById("phoneError").classList.remove("visible");
       document.getElementById("phoneInput").classList.remove("error");
-      // Clear cart
+      
       cart = [];
       updateCartUI();
       renderGrid(currentFilter);
@@ -1912,7 +1905,6 @@
       const phoneError = document.getElementById("phoneError");
       const phoneInput = document.getElementById("phoneInput");
 
-      // Validate
       if (!validatePhone(phone)) {
         phoneInput.classList.add("error");
         phoneError.classList.add("visible");
@@ -1923,7 +1915,6 @@
       phoneInput.classList.remove("error");
       phoneError.classList.remove("visible");
 
-      // Loading state
       const btn = document.getElementById("submitBtn");
       const spinner = document.getElementById("submitSpinner");
       const btnText = document.getElementById("submitText");
@@ -1931,7 +1922,6 @@
       spinner.classList.add("visible");
       btnText.textContent = "Надсилаємо...";
 
-      // Build message
       const orderLines = cart.map((l, i) =>
         `  ${i + 1}. [ID: ${l.id}] ${l.name} — ${l.weight}, ${l.length}, ${l.type}${l.color ? `\n     Колір: ${l.color}` : ""}\n     Ціна: ${l.price} грн`
       ).join("\n");
@@ -1978,7 +1968,6 @@ ${actionLines}`;
       }
     }
 
-    // ── SLIDER ──
     const sliderState = {};
 
     function slideDir(id, dir, e) {
@@ -2010,7 +1999,6 @@ ${actionLines}`;
       }
     }
 
-    // ── TOUCH SWIPE — только мобильный, только свайп ──
     function initCardSwipe(id) {
       const slider = document.getElementById(`slider_${id}`);
       if (!slider) return;
@@ -2052,7 +2040,6 @@ ${actionLines}`;
       }, { passive: true });
     }
 
-    // ── FILTERS ──
     document.querySelectorAll(".filter-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
@@ -2062,7 +2049,6 @@ ${actionLines}`;
       });
     });
 
-    // ── KEYBOARD ──
     document.addEventListener("keydown", e => {
       if (e.key === "Escape") {
         if (document.getElementById("lightbox").classList.contains("open")) closeLightbox();
@@ -2075,7 +2061,6 @@ ${actionLines}`;
       if (e.key === "Enter" && document.getElementById("orderOverlay").classList.contains("open")) submitOrder();
     });
 
-    // ── CUSTOM ORDER ──
     function openCustomOrder() {
       document.getElementById("customOrderOverlay").classList.add("open");
       document.body.style.overflow = "hidden";
@@ -2143,7 +2128,6 @@ ${actionLines}`;
       }
     }
 
-    // ── LIGHTBOX ──
     let lbImgs = [];
     let lbIdx = 0;
 
@@ -2208,7 +2192,6 @@ ${actionLines}`;
       };
     }
 
-    // ── SECURITY: екранування HTML для даних з Google Sheets ──
     function esc(str) {
       if (!str) return "";
       return String(str)
@@ -2219,14 +2202,12 @@ ${actionLines}`;
         .replace(/'/g, "&#39;");
     }
 
-    // ── INIT ──
     const CACHE_KEY = "25craft_lures";
-    const CACHE_TTL = 5 * 60 * 1000; // 5 хвилин
+    const CACHE_TTL = 5 * 60 * 1000; 
 
     async function loadFromSheets() {
       const grid = document.getElementById("grid");
 
-      // Показуємо кешовані дані миттєво
       try {
         const cached = sessionStorage.getItem(CACHE_KEY);
         if (cached) {
@@ -2236,14 +2217,13 @@ ${actionLines}`;
             document.getElementById("stockCount").textContent =
               lures.filter(l => l.status === "available").reduce((sum, l) => sum + l.qty, 0);
             renderGrid("all");
-            // Оновлюємо у фоні
+            
             fetchFromSheets(false);
             return;
           }
         }
       } catch {}
 
-      // Перший завантаження — показуємо індикатор
       grid.innerHTML = '<div class="grid-empty">Завантаження...</div>';
       await fetchFromSheets(true);
     }
@@ -2274,7 +2254,6 @@ ${actionLines}`;
           };
         });
 
-        // Зберігаємо в кеш
         try {
           sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: freshLures, ts: Date.now() }));
         } catch {}
