@@ -261,11 +261,18 @@
         align-items: flex-start !important;
         gap: 0 !important;
         padding: 32px 20px 28px !important;
+        background-image: linear-gradient(to bottom, rgba(12,12,12,0.35) 0%, rgba(12,12,12,0.7) 100%), url('Images/hero-bg.webp') !important;
+        background-position: center top !important;
       }
 
       .hero-right {
         text-align: left !important;
-        margin-top: 20px;
+        margin-top: 24px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 12px 20px;
+        display: inline-block;
       }
 
       .hero-stat {
@@ -363,7 +370,7 @@
       justify-content: space-between;
       gap: 24px;
       flex-wrap: wrap;
-      background-image: url('Images/hero-bg.webp');
+      background-image: linear-gradient(to bottom, rgba(12,12,12,0.45) 0%, rgba(12,12,12,0.65) 100%), url('Images/hero-bg.webp');
       background-size: cover;
       background-position: center;
     }
@@ -401,9 +408,10 @@
     .hero-desc {
       margin-top: 8px;
       font-size: 15px;
-      color: var(--muted2);
+      color: rgba(238,235,228,0.75);
       max-width: 360px;
       line-height: 1.6;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
     }
 
     /* ── FILTERS ── */
