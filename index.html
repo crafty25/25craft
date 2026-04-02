@@ -60,6 +60,9 @@
   </script>
 
 
+  <!-- Preload критичних зображень -->
+  <link rel="preload" as="image" href="Images/hero-bg.webp">
+
   <!-- Preconnect для швидшого з'єднання з API -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1767,9 +1770,9 @@
         if (imgs.length === 0) {
           imgHtml = `<div class="card-img-placeholder">🎣</div>`;
         } else if (imgs.length === 1) {
-          imgHtml = `<div class="card-slider" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${esc(imgs[0])}" alt="${esc(l.name)}" width="800" height="600" ${loadAttr}></div></div>`;
+          imgHtml = `<div class="card-slider" onclick="openLightboxById(${l.id}, 0)"><div class="slider-track"><img class="slider-slide" src="${esc(imgs[0])}" alt="${esc(l.name)}" width="400" height="300" ${loadAttr}></div></div>`;
         } else {
-          const slides = imgs.map((src, i) => `<img class="slider-slide" src="${esc(src)}" alt="${esc(l.name)}" width="800" height="600" ${i === 0 ? loadAttr : 'loading="lazy"'}>`).join("");
+          const slides = imgs.map((src, i) => `<img class="slider-slide" src="${esc(src)}" alt="${esc(l.name)}" width="400" height="300" ${i === 0 ? loadAttr : 'loading="lazy"'}>`).join("");
           const dots = imgs.map((_, i) => `<span class="slider-dot ${i === 0 ? 'active' : ''}" onclick="slideTo(${l.id},${i},event)"></span>`).join("");
           imgHtml = `
         <div class="card-slider" id="slider_${l.id}">
@@ -2349,11 +2352,14 @@ ${actionLines}`;
     gtag('config', 'G-VFVKSM7FHL');
   </script>
 
-  <!-- Facebook Pixel Code -->
-  <script>!function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '975518988475902'); fbq('track', 'PageView');</script>
-  <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=975518988475902&ev=PageView&noscript=1" /></noscript>
-  <!-- End Facebook Pixel Code -->
+  <!-- Facebook Pixel Code — відкладено щоб не блокувати рендеринг -->
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s) }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '975518988475902'); fbq('track', 'PageView');
+      }, 1000);
+    });
+  </script>
 
 </body>
 
