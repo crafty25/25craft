@@ -22,7 +22,6 @@
   <meta property="og:locale" content="uk_UA">
   <meta property="og:site_name" content="25craft">
 
-  <!-- Theme color для мобільних браузерів -->
   <meta name="theme-color" content="#0c0c0c">
 
   <!-- Apple Touch Icon -->
@@ -59,16 +58,14 @@
   }
   </script>
 
-
-  <!-- Preload критичних зображень -->
   <link rel="preload" as="image" href="Images/hero-bg.webp">
 
-  <!-- Preconnect для швидшого з'єднання з API -->
+  <!-- Preconnect API -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://sheets.googleapis.com">
   <link rel="preconnect" href="https://25craft-bot.m-poliakh.workers.dev" crossorigin>
-  <!-- Асинхронне завантаження шрифтів — не блокує рендеринг -->
+
   <link rel="preload"
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
     as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -127,14 +124,6 @@
       align-items: center;
       gap: 12px;
     }
-
-    /* .logo-mark {
-  width: 36px; height: 36px;
-  background: var(--accent);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-} */
 
     .logo-mark span {
       font-family: 'Bebas Neue', sans-serif;
@@ -2343,7 +2332,7 @@ ${actionLines}`;
 
     loadFromSheets();
   </script>
-  
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
@@ -2359,7 +2348,7 @@ ${actionLines}`;
   }, 3000);
 </script>
 
-  <!-- Facebook Pixel Code — відкладено щоб не блокувати рендеринг -->
+
   <script>
     window.addEventListener('load', function() {
       setTimeout(function() {
