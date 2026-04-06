@@ -533,7 +533,6 @@
 
     .card-body {
       padding: 14px 16px 16px;
-      position: relative;
     }
 
     .card-row1 {
@@ -657,12 +656,16 @@
     .card-id {
       position: absolute;
       bottom: 8px;
-      right: 10px;
-      font-size: 10px;
-      color: var(--text-muted, #888);
-      opacity: 0.55;
+      right: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(0,0,0,0.45);
+      padding: 2px 6px;
+      border-radius: 4px;
       pointer-events: none;
       user-select: none;
+      z-index: 2;
     }
 
     /* ── SLIDER ── */
@@ -1789,6 +1792,7 @@
       <div class="card-img-wrap">
         ${imgHtml}
         <span class="status-pill ${esc(l.status)}">${statusLabel[l.status] || ''}</span>
+        <span class="card-id">#${String(l.id).padStart(3, '0')}</span>
       </div>
       <div class="card-body">
         <div class="card-row1">
@@ -1813,7 +1817,6 @@
           ${sold ? 'disabled' : ''}
           id="addBtn_${Number(l.id)}"
         >${sold ? 'Недоступно' : inCart ? '✓ В кошику' : 'Додати до кошика'}</button>
-        <span class="card-id">#${String(l.id).padStart(3, '0')}</span>
       </div>
     `;
         grid.appendChild(card);
