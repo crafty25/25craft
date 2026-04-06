@@ -533,6 +533,7 @@
 
     .card-body {
       padding: 14px 16px 16px;
+      position: relative;
     }
 
     .card-row1 {
@@ -651,6 +652,17 @@
     .card-add-btn:disabled {
       opacity: 0.3;
       cursor: not-allowed;
+    }
+
+    .card-id {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-size: 10px;
+      color: var(--text-muted, #888);
+      opacity: 0.55;
+      pointer-events: none;
+      user-select: none;
     }
 
     /* ── SLIDER ── */
@@ -1801,6 +1813,7 @@
           ${sold ? 'disabled' : ''}
           id="addBtn_${Number(l.id)}"
         >${sold ? 'Недоступно' : inCart ? '✓ В кошику' : 'Додати до кошика'}</button>
+        <span class="card-id">#${String(l.id).padStart(3, '0')}</span>
       </div>
     `;
         grid.appendChild(card);
@@ -1978,7 +1991,7 @@
       btnText.textContent = "Надсилаємо...";
 
       const orderLines = cart.map((l, i) =>
-        `  ${i + 1}. [ID: ${l.id}] ${l.name} — ${l.weight}, ${l.length}, ${l.type}${l.color ? `\n     Колір: ${l.color}` : ""}\n     Ціна: ${l.price} грн`
+        `  ${i + 1}. [#${String(l.id).padStart(3, '0')}] ${l.name} — ${l.weight}, ${l.length}, ${l.type}${l.color ? `\n     Колір: ${l.color}` : ""}\n     Ціна: ${l.price} грн`
       ).join("\n");
 
       const actionLines = cart.map(l =>
