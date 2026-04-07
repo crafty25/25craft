@@ -2309,7 +2309,7 @@ ${actionLines}`;
           const obj = {};
           headers.forEach((h, i) => obj[h] = row[i] || "");
           return {
-            id: Number(obj.id),
+            id: Number(String(obj.id).replace('#', '')),
             name: obj.name,
             weight: obj.weight,
             length: obj.length,
