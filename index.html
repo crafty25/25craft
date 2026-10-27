@@ -1642,6 +1642,10 @@
           oninput="formatPhone(this)">
         <div class="field-error" id="customPhoneError">Введіть коректний номер телефону</div>
 
+        <label class="field-label">Email *</label>
+        <input class="field-input" id="customEmailInput" type="email" placeholder="example@gmail.com" maxlength="100">
+        <div class="field-error" id="customEmailError">Введіть коректний email</div>
+
         <div class="order-actions">
           <button class="btn-submit" id="customSubmitBtn" onclick="submitCustomOrder()">
             <span class="spinner" id="customSubmitSpinner"></span>
@@ -1682,7 +1686,7 @@
     <div class="order-modal">
       <div class="order-form-content" id="orderFormContent">
         <div class="order-modal-title">Оформлення</div>
-        <div class="order-modal-sub">Залишіть номер телефону - я зв'яжусь з вами для уточнення оплати та доставки.</div>
+        <div class="order-modal-sub">Залишіть номер телефону та email - я зв'яжусь з вами для уточнення оплати та доставки.</div>
 
         <div class="order-summary" id="orderSummary"></div>
 
@@ -1690,6 +1694,10 @@
         <input class="field-input" id="phoneInput" type="tel" placeholder="+380 XX XXX XX XX" maxlength="17"
           oninput="formatPhone(this)">
         <div class="field-error" id="phoneError">Введіть коректний номер телефону</div>
+
+        <label class="field-label">Email *</label>
+        <input class="field-input" id="emailInput" type="email" placeholder="example@gmail.com" maxlength="100">
+        <div class="field-error" id="emailError">Введіть коректний email</div>
 
         <label class="field-label">Коментар (необов'язково)</label>
         <input class="field-input" id="commentInput" type="text" placeholder="Зручний час для дзвінка, уточнення...">
@@ -1951,6 +1959,9 @@
       document.getElementById("commentInput").value = "";
       document.getElementById("phoneError").classList.remove("visible");
       document.getElementById("phoneInput").classList.remove("error");
+      document.getElementById("emailInput").value = "";
+      document.getElementById("emailError").classList.remove("visible");
+      document.getElementById("emailInput").classList.remove("error");
 
       cart = [];
       updateCartUI();
@@ -1969,11 +1980,18 @@
       return clean.length >= 10 && clean.length <= 12;
     }
 
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    }
+
     async function submitOrder() {
       const phone = document.getElementById("phoneInput").value.trim();
       const comment = document.getElementById("commentInput").value.trim();
       const phoneError = document.getElementById("phoneError");
       const phoneInput = document.getElementById("phoneInput");
+      const email = document.getElementById("emailInput").value.trim();
+      const emailError = document.getElementById("emailError");
+      const emailInput = document.getElementById("emailInput");
 
       if (!validatePhone(phone)) {
         phoneInput.classList.add("error");
@@ -1984,6 +2002,16 @@
 
       phoneInput.classList.remove("error");
       phoneError.classList.remove("visible");
+
+      if (!validateEmail(email)) {
+        emailInput.classList.add("error");
+        emailError.classList.add("visible");
+        emailInput.focus();
+        return;
+      }
+
+      emailInput.classList.remove("error");
+      emailError.classList.remove("visible");
 
       const btn = document.getElementById("submitBtn");
       const spinner = document.getElementById("submitSpinner");
@@ -2008,7 +2036,8 @@ ${orderLines}
 
 💰 *Разом:* ${calcTotal()} грн
 
-📞 *Телефон:* ${phone}${comment ? `\n\n💬 *Коментар:* ${comment}` : ""}
+📞 *Телефон:* ${phone}
+📧 *Email:* ${email.replace(/[_*`\[]/g, "\\$&")}${comment ? `\n\n💬 *Коментар:* ${comment}` : ""}
 
 ⏰ ${new Date().toLocaleString("uk-UA")}
 
@@ -2146,6 +2175,9 @@ ${actionLines}`;
       document.getElementById("customPhoneInput").value = "";
       document.getElementById("customPhoneError").classList.remove("visible");
       document.getElementById("customPhoneInput").classList.remove("error");
+      document.getElementById("customEmailInput").value = "";
+      document.getElementById("customEmailError").classList.remove("visible");
+      document.getElementById("customEmailInput").classList.remove("error");
       document.getElementById("customSubmitBtn").disabled = false;
       document.getElementById("customSubmitSpinner").classList.remove("visible");
       document.getElementById("customSubmitText").textContent = "Надіслати";
@@ -2160,6 +2192,9 @@ ${actionLines}`;
       const phone = document.getElementById("customPhoneInput").value.trim();
       const phoneError = document.getElementById("customPhoneError");
       const phoneInput = document.getElementById("customPhoneInput");
+      const email = document.getElementById("customEmailInput").value.trim();
+      const emailError = document.getElementById("customEmailError");
+      const emailInput = document.getElementById("customEmailInput");
 
       if (!validatePhone(phone)) {
         phoneInput.classList.add("error");
@@ -2170,12 +2205,21 @@ ${actionLines}`;
       phoneInput.classList.remove("error");
       phoneError.classList.remove("visible");
 
+      if (!validateEmail(email)) {
+        emailInput.classList.add("error");
+        emailError.classList.add("visible");
+        emailInput.focus();
+        return;
+      }
+      emailInput.classList.remove("error");
+      emailError.classList.remove("visible");
+
       const btn = document.getElementById("customSubmitBtn");
       btn.disabled = true;
       document.getElementById("customSubmitSpinner").classList.add("visible");
       document.getElementById("customSubmitText").textContent = "Надсилаємо...";
 
-      const message = `✏️ *Індивідуальне замовлення — 25craft*\n\n👤 *Ім'я:* ${name || "не вказано"}\n📞 *Телефон:* ${phone}\n\n⏰ ${new Date().toLocaleString("uk-UA")}`;
+      const message = `✏️ *Індивідуальне замовлення — 25craft*\n\n👤 *Ім'я:* ${name || "не вказано"}\n📞 *Телефон:* ${phone}\n📧 *Email:* ${email.replace(/[_*`\[]/g, "\\$&")}\n\n⏰ ${new Date().toLocaleString("uk-UA")}`;
 
       try {
         const res = await fetch(WORKER_URL, {
